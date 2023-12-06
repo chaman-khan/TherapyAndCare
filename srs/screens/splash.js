@@ -2,9 +2,12 @@ import React from 'react';
 
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 import {theme} from '../constants/theme';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
 const {width, height} = Dimensions.get('screen');
 
 const Splash = () => {
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -21,7 +24,8 @@ const Splash = () => {
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry.
       </Text>
-      <View
+      <TouchableOpacity
+        activeOpacity={1}
         style={{
           height: 50,
           width: '100%',
@@ -29,9 +33,10 @@ const Splash = () => {
           marginTop: 50,
           alignItems: 'center',
           justifyContent: 'center',
-        }}>
+        }}
+        onPress={() => navigation.navigate('SignIn')}>
         <Text style={styles.btn}>Get Started</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -42,7 +47,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontFamily: 'Inter',
     fontWeight: '500',
-    marginTop: 20,  
+    marginTop: 20,
   },
   text: {
     color: 'white',

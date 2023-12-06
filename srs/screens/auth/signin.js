@@ -1,8 +1,90 @@
-import React from 'react';
-import {Image, TextInput, View, Text, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {
+  Image,
+  TextInput,
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import {theme} from '../../constants/theme';
+import {
+  responsiveScreenFontSize,
+  responsiveScreenWidth,
+} from 'react-native-responsive-dimensions';
 
 const SignIn = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  const handleLogin = () => {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,}$/;
+
+    const emailRegex =
+      /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,})$/;
+    if (!emailRegex.test(email)) {
+      setEmailError(true);
+      Alert.alert(
+        'Email Error',
+        'Please enter a valid email address.',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {cancelable: false},
+      );
+      return;
+    } else {
+      setEmailError(false);
+    }
+    if (!passwordRegex.test(password)) {
+      setPasswordError(true);
+      Alert.alert(
+        'Password Error',
+        'Password must be at least 6 characters long and contain at least one digit, one letter, and one special character.',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {cancelable: false},
+      );
+      return;
+    } else {
+      setPasswordError(false);
+    }
+    if (!email) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+    if (!password) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+    if (emailError || passwordError) {
+      Alert.alert(
+        'Warning',
+        'Please enter a valid user name or password.',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {cancelable: false},
+      );
+    } else {
+      // navigation.navigate('BottomTab');
+    }
+  };
   return (
     <View>
       <Image source={require('../../Assets/Images/design.png')} />
@@ -22,11 +104,17 @@ const SignIn = () => {
         <Image source={require('../../Assets/Images/email.png')} />
         <TextInput placeholder="Email" style={{fontSize: 16}} />
       </View>
+      {emailError ? (
+        <Text style={styles.Error_Text}>* Enter Valid Email</Text>
+      ) : null}
       <View style={styles.input}>
         <Image source={require('../../Assets/Images/contact.png')} />
         <TextInput placeholder="Contact Number" style={{fontSize: 16}} />
       </View>
-      <View
+      {passwordError ? (
+        <Text style={styles.Error_Text}>* Enter Valid password</Text>
+      ) : null}
+      <TouchableOpacity
         style={{
           height: 50,
           width: '90%',
@@ -35,9 +123,10 @@ const SignIn = () => {
           alignItems: 'center',
           justifyContent: 'center',
           alignSelf: 'center',
-        }}>
+        }}
+        onPress={handleLogin}>
         <Text style={{color: 'white'}}>Submit</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -55,6 +144,14 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     marginVertical: 7,
     paddingHorizontal: 15,
+  },
+  Error_Text: {
+    fontFamily: 'Poppins',
+    fontWeight: '500',
+    fontSize: responsiveScreenFontSize(1.2),
+    color: 'red',
+    marginLeft: responsiveScreenWidth(3),
+    marginTop: 3,
   },
 });
 
