@@ -8,11 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {theme} from '../../constants/theme';
-// import {
-//   CountryPicker,
-//   RegionDropdown,
-//   CityDropdown,
-// } from 'react-native-country-state-city';
 import {Country, State, City} from 'country-state-city';
 import RNPickerSelect from 'react-native-picker-select';
 
