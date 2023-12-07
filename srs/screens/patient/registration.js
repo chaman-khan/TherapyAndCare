@@ -23,12 +23,6 @@ const Registration = () => {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
 
-  // console.log(Country.getAllCountries());
-  // console.log(State.getStatesOfCountry());
-  // console.log('====================================');
-  // console.log(City.getAllCities());
-  // console.log('====================================');
-
   const handleCheckboxToggle = checkboxNumber => {
     setIsChecked1(checkboxNumber === 1);
     setIsChecked2(checkboxNumber === 2);
