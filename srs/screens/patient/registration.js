@@ -6,16 +6,21 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Picker,
 } from 'react-native';
 import {theme} from '../../constants/theme';
 import {Country, State, City} from 'country-state-city';
+import {ICountry, IState, ICity} from 'country-state-city';
 import RNPickerSelect from 'react-native-picker-select';
+import Flag from 'react-native-country-flag';
+import CountryStateCityPicker from 'country-state-city';
+import {} from 'react-native-p'
 
 const Registration = () => {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
-  const [countries, setCountries] = useState([]);
-  const [states, setStates] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedState, setSelectedState] = useState('');
   const [cities, setCities] = useState([]);
 
   const handleCheckboxToggle = checkboxNumber => {
@@ -23,23 +28,33 @@ const Registration = () => {
     setIsChecked2(checkboxNumber === 2);
   };
 
-  useEffect(() => {
-    // Fetch country data
-    const countryData = Country.getAllCountries();
-    setCountries(countryData);
-  }, []);
+  // useEffect(() => {
+  //   // Fetch country data
+  //   const countryData = Country.getAllCountries();
+  //   setCountries(countryData);
+  // }, []);
 
-  const handleCountryChange = countryCode => {
-    // Fetch state data based on the selected country
-    const stateData = State.getStatesOfCountry(countryCode);
-    setStates(stateData);
+  const handleCountryChange = country => {
+    setSelectedCountry(country);
+    const states = CountryStateCityPicker.getStatesOfCountry(country);
+    setSelectedState(states[0].isoCode); // Select the first state by default
+    setCities(
+      CountryStateCityPicker.getCitiesOfState(country, states[0].isoCode),
+    );
   };
 
-  const handleStateChange = stateCode => {
-    // Fetch city data based on the selected state
-    const cityData = City.getCitiesOfState(stateCode);
-    setCities(cityData);
+  const handleStateChange = state => {
+    setSelectedState(state);
+    setCities(CountryStateCityPicker.getCitiesOfState(selectedCountry, state));
   };
+  const handleCityChange = city => {
+    // Handle city change if needed
+    console.log(city);
+  };
+  // console.log(ICountry);
+  // console.log('====================================');
+  // console.log(Country.getAllCountries());
+  // console.log('====================================');
 
   return (
     <View>
@@ -111,7 +126,47 @@ const Registration = () => {
         <TextInput placeholder="Email Address" style={{fontSize: 16}} />
       </View>
 
-      <RNPickerSelect
+      <Picker
+        selectedValue={selectedCountry}
+        onValueChange={handleCountryChange}>
+        {CountryStateCityPicker.getCountryList().map(country => (
+          <Picker.Item
+            key={country.isoCode}
+            label={`${country.name} (${country.isoCode})`}
+            value={country.isoCode}
+          />
+        ))}
+      </Picker>
+      {selectedCountry && (
+        <>
+          <Picker
+            selectedValue={selectedState}
+            onValueChange={handleStateChange}>
+            {CountryStateCityPicker.getStatesOfCountry(selectedCountry).map(
+              state => (
+                <Picker.Item
+                  key={state.isoCode}
+                  label={state.name}
+                  value={state.isoCode}
+                />
+              ),
+            )}
+          </Picker>
+          {cities.length > 0 && (
+            <Picker>
+              {cities.map(city => (
+                <Picker.Item
+                  key={city.isoCode}
+                  label={city.name}
+                  value={city.isoCode}
+                />
+              ))}
+            </Picker>
+          )}
+        </>
+      )}
+      <Flag countryCode={selectedCountry} size={32} />
+      {/* <RNPickerSelect
         items={countries.map(country => ({
           label: country.isoCode,
           value: country.isoCode,
@@ -124,8 +179,8 @@ const Registration = () => {
       />
       <RNPickerSelect
         items={cities.map(city => ({label: city.name, value: city.name}))}
-        onValueChange={value => console.log(value)}
-      />
+        onValueChange={value => handleCityChange(value)}
+      /> */}
     </View>
   );
 };
