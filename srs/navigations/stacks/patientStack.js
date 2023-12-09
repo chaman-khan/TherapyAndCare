@@ -4,7 +4,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Registration from '../../screens/patient/registration';
 import Physiotherapist from '../../screens/patient/Home/physiotherapist';
 import DoctorInfo from '../../screens/patient/Home/dosctorInfo';
-import BottomTab from '../tabs/bottomTab';
 import ConfirmInfo from '../../screens/patient/Home/doctorConfirmInfo';
 import AddDetails from '../../screens/patient/Home/addDetails';
 import AppointmentDetails from '../../screens/patient/Home/appointmentSchdule';
@@ -13,20 +12,21 @@ import NotificationMessage from '../../screens/patient/Home/notificationMessage'
 import FeedBack from '../../screens/patient/Home/feedBack';
 import AccountDetails from '../../screens/patient/Home/accountDetails';
 import BookingDetails from '../../screens/patient/Home/bookingDetails';
+import Home from '../../screens/patient/Home/home';
 
 function PatientStack() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <Stack.Navigator initialRouteName='BottomTab' screenOptions={{headerShown: false}}>
+    <Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
       <Stack.Screen
-        name="Registration"
-        component={Registration}
+        name="Home"
+        component={Home}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="BottomTab"
-        component={BottomTab}
+        name="Registration"
+        component={Registration}
         options={{headerShown: false}}
       />
       <Stack.Screen

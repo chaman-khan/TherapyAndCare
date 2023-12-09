@@ -59,8 +59,8 @@ const FreeCanceltion = ({navigation}) => {
         activeOpacity={1}
         style={styles.Button_Box}
         onPress={() => {
-          setIsShow1(false);
-          navigation.navigate('CancelationPolicy');
+          setIsShow(true);
+          // navigation.navigate('CancelationPolicy');
         }}>
         <View style={styles.Button} activeOpacity={0.7}>
           <Text style={styles.Verify_Text}>Confirm</Text>
@@ -137,7 +137,7 @@ const FreeCanceltion = ({navigation}) => {
             <TouchableOpacity
         activeOpacity={1}
         style={styles.Button_Box}
-        onPress={() => navigation.navigate('BottomTab')}>
+        onPress={() => navigation.navigate('CancelationPolicy')}>
         <View style={styles.Button} activeOpacity={0.7}>
           <Text style={styles.Verify_Text}>Check out</Text>
         </View>

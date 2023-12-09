@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    marginBottom: 60,
+    marginBottom: 160,
   },
   Verify_Text: {
     fontFamily: 'Poppins',

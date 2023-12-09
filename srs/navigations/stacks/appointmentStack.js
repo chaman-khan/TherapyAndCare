@@ -11,7 +11,7 @@ const AppointmentStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="FreeCanceltion"
+      initialRouteName="Appointments"
       screenOptions={{headerShown: false}}>
       <Stack.Screen
         name="Appointments"

@@ -66,7 +66,7 @@ const BookingDetails = ({navigation}) => {
       <TouchableOpacity
         activeOpacity={1}
         style={styles.Button_Box}
-        onPress={() => navigation.navigate('BottomTab')}>
+        onPress={() => navigation.replace('BottomTab', {screen: 'AppointmentStack'})}>
         <View style={styles.Button} activeOpacity={0.7}>
           <Text style={styles.Verify_Text}>Done</Text>
         </View>

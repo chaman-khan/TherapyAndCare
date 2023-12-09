@@ -1,12 +1,13 @@
 import React from 'react';
-import {Image, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {Image, View, Text, TouchableOpacity, StyleSheet, ScrollView} from 'react-native';
 import { theme } from '../../../constants/theme';
 
 const DoctorInfo = ({navigation, route}) => {
   const {item} = route.params;
 
   return (
-    <View>
+    <ScrollView>
+      <View>
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
@@ -97,6 +98,7 @@ const DoctorInfo = ({navigation, route}) => {
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
