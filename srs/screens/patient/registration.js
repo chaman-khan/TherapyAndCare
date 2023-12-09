@@ -246,14 +246,14 @@ const Registration = ({navigation}) => {
           <Image source={require('../../Assets/Images/pinCode.png')} />
           <TextInput placeholder="Pincode" style={{fontSize: 16}} />
         </View>
-        <View style={styles.Button_Box}>
-          <TouchableOpacity
+        <TouchableOpacity activeOpacity={1} style={styles.Button_Box}>
+          <View
             style={styles.Button}
             activeOpacity={0.7}
             onPress={() => navigation.replace('BottomTab')}>
             <Text style={styles.Verify_Text}>Submit</Text>
-          </TouchableOpacity>
-        </View>
+          </View>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
