@@ -2,8 +2,14 @@ import React from 'react';
 import App from '../../../../App';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { theme } from '../../../constants/theme';
+import { Calendar } from 'react-native-calendars';
 
 const AppointmentDetails = () => {
+    const [selectedDate, setSelectedDate] = useState('');
+
+  const onDayPress = day => {
+    setSelectedDate(day.dateString);
+  };
   return (
     <View style={{width: '90%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
@@ -24,6 +30,7 @@ const AppointmentDetails = () => {
         />
       </View>
       <Text style={{fontSize: 20, fontFamily: 'Inter', color: 'black'}}>Select Date</Text>
+      <Calendar  onDayPress={onDayPress} markedDates={{ [selectedDate]: { selected: true } }}/>
     </View>
   );
 };
