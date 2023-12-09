@@ -207,7 +207,7 @@ const AppointmentDetails = ({navigation}) => {
           <TouchableOpacity
             activeOpacity={1}
             style={styles.Button_Box}
-            onPress={() => navigation.navigate('AppointmentDetails')}>
+            onPress={() => navigation.navigate('Scheduled', {selectedTime})}>
             <View style={styles.Button} activeOpacity={0.7}>
               <Text style={styles.Verify_Text}>Confirm appointment</Text>
             </View>

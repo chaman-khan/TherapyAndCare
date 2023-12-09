@@ -8,6 +8,7 @@ import BottomTab from '../tabs/bottomTab';
 import ConfirmInfo from '../../screens/patient/Home/doctorConfirmInfo';
 import AddDetails from '../../screens/patient/Home/addDetails';
 import AppointmentDetails from '../../screens/patient/Home/appointmentSchdule';
+import Scheduled from '../../screens/patient/Home/scheduled';
 
 function PatientStack() {
   const Stack = createNativeStackNavigator();
@@ -47,6 +48,11 @@ function PatientStack() {
       <Stack.Screen
         name="AppointmentDetails"
         component={AppointmentDetails}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Scheduled"
+        component={Scheduled}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
