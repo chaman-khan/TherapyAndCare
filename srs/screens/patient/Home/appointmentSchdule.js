@@ -1,12 +1,20 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ScrollView,
+  Dimensions,
+} from 'react-native';
 import {theme} from '../../../constants/theme';
 import {Calendar} from 'react-native-calendars';
 import moment from 'moment';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
-
-const AppointmentDetails = () => {
+const {height} = Dimensions.get('screen');
+const AppointmentDetails = ({navigation}) => {
   const [selectedDate, setSelectedDate] = useState('');
 
   const onDayPress = day => {
@@ -24,6 +32,9 @@ const AppointmentDetails = () => {
     );
   };
 
+  const [hours, setHours] = useState(12);
+  const [minutes, setMinutes] = useState(0);
+  const [isPM, setIsPM] = useState(false);
   const [isPickerVisible, setPickerVisibility] = useState(false);
   const [selectedTime, setSelectedTime] = useState(new Date());
 
@@ -36,10 +47,32 @@ const AppointmentDetails = () => {
   };
 
   const handleConfirm = time => {
-    setSelectedTime(time);
+    const selectedTime = moment(time);
+    setHours(selectedTime.format('h')); // Set hours
+    setMinutes(selectedTime.format('mm')); // Set minutes
+    setIsPM(selectedTime.format('A') === 'PM');
     hidePicker();
   };
 
+  const incrementHours = () => {
+    setHours((hours + 1) % 12 || 12);
+  };
+
+  const decrementHours = () => {
+    setHours((hours - 1 + 12) % 12 || 12);
+  };
+
+  const incrementMinutes = () => {
+    setMinutes((minutes + 1) % 60);
+  };
+
+  const decrementMinutes = () => {
+    setMinutes((minutes - 1 + 60) % 60);
+  };
+
+  const toggleAMPM = () => {
+    setIsPM(!isPM);
+  };
   return (
     <View style={{width: '90%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
@@ -59,42 +92,128 @@ const AppointmentDetails = () => {
           tintColor="transparent"
         />
       </View>
-      <Text style={{fontSize: 20, fontFamily: 'Inter', color: 'black', marginBottom: 20}}>
-        Select Date
-      </Text>
-      <Calendar style={{backgroundColor: '#F8F8F8'}}
-        onDayPress={onDayPress}
-        markedDates={{[selectedDate]: {selected: true}}}
-        // renderHeader={renderCustomHeader}
-        theme={{
-          textMonthFontWeight: 'bold', // Adjust the fontWeight for the month text
-          textDayHeaderFontWeight: 'bold', // Adjust the fontWeight for the day names
-          arrowStyle: {
-            fontSize: 24,
-          },
-        }}
-      />
+      <ScrollView style={{height: height-100}}>
+        <View >
+          <Text
+            style={{
+              fontSize: 20,
+              fontFamily: 'Inter',
+              color: 'black',
+              marginBottom: 20,
+            }}>
+            Select Date
+          </Text>
+          <Calendar
+            style={{backgroundColor: '#F8F8F8'}}
+            onDayPress={onDayPress}
+            markedDates={{[selectedDate]: {selected: true}}}
+            // renderHeader={renderCustomHeader}
+            theme={{
+              textMonthFontWeight: 'bold', // Adjust the fontWeight for the month text
+              textDayHeaderFontWeight: 'bold', // Adjust the fontWeight for the day names
+              arrowStyle: {
+                fontSize: 24,
+              },
+            }}
+          />
 
-<View style={styles.container}>
-      <TouchableOpacity onPress={showPicker}>
-        <Text style={styles.selectedTimeText}>
-          {selectedTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}
-        </Text>
-      </TouchableOpacity>
+          <TouchableOpacity activeOpacity={1} onPress={showPicker}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontFamily: 'Inter',
+                color: 'black',
+                marginVertical: 20,
+              }}>
+              Select Time
+            </Text>
+          </TouchableOpacity>
 
-      <DateTimePickerModal
-        isVisible={isPickerVisible}
-        mode="time"
-        onConfirm={handleConfirm}
-        onCancel={hidePicker}
-      />
-    </View>
+          <DateTimePickerModal
+            isVisible={isPickerVisible}
+            mode="time"
+            onConfirm={handleConfirm}
+            onCancel={hidePicker}
+          />
 
-      {selectedDate && (
-        <View style={styles.selectedDateContainer}>
-          <Text style={styles.selectedDateText}>{formattedDate}</Text>
+          <TouchableOpacity onPress={showPicker} activeOpacity={1}>
+            <View style={styles.container1}>
+              <View style={styles.timeSection}>
+                <TouchableOpacity onPress={incrementHours}>
+                  <Image
+                    source={require('../../../Assets/Images/downArrow.png')}
+                    tintColor="#1C76B3"
+                    style={{width: 12, height: 12, transform: [{scaleY: -1}]}}
+                  />
+                </TouchableOpacity>
+                <Text>{`0${hours}`.slice(-2)} h</Text>
+                <TouchableOpacity onPress={decrementHours}>
+                  <Image
+                    source={require('../../../Assets/Images/downArrow.png')}
+                    tintColor="#1C76B3"
+                    style={{width: 12, height: 12}}
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.timeSection}>
+                <TouchableOpacity onPress={incrementMinutes}>
+                  <Image
+                    source={require('../../../Assets/Images/downArrow.png')}
+                    tintColor="#1C76B3"
+                    style={{width: 12, height: 12, transform: [{scaleY: -1}]}}
+                  />
+                </TouchableOpacity>
+                <Text style={styles.timeDigit}>
+                  {`0${minutes}`.slice(-2)} m
+                </Text>
+                <TouchableOpacity onPress={decrementMinutes}>
+                  <Image
+                    source={require('../../../Assets/Images/downArrow.png')}
+                    tintColor="#1C76B3"
+                    style={{width: 12, height: 12}}
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.timeSection}>
+                <TouchableOpacity onPress={toggleAMPM}>
+                  <Text
+                    style={{
+                      ...styles.button,
+                      color: isPM ? 'black' : '#1C76B3',
+                    }}>
+                    AM
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={toggleAMPM}>
+                  <Text
+                    style={{
+                      ...styles.button,
+                      color: isPM ? '#1C76B3' : 'black',
+                    }}>
+                    PM
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </TouchableOpacity>
+
+          {selectedDate && (
+            <View style={styles.selectedDateContainer}>
+              <Text style={styles.selectedDateText}>{formattedDate}</Text>
+            </View>
+          )}
+          <TouchableOpacity
+            activeOpacity={1}
+            style={styles.Button_Box}
+            onPress={() => navigation.navigate('AppointmentDetails')}>
+            <View style={styles.Button} activeOpacity={0.7}>
+              <Text style={styles.Verify_Text}>Confirm appointment</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-      )}
+      </ScrollView>
     </View>
   );
 };
@@ -126,7 +245,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
-    backgroundColor: '#F6F6F6',
+    backgroundColor: 'white',
     borderRadius: 8,
   },
 
@@ -144,6 +263,49 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Inter',
     fontWeight: '400',
+  },
+  container1: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  timeSection: {
+    width: '30%',
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 10,
+    paddingVertical: 5,
+    gap: 5,
+  },
+  timeDigit: {
+    fontSize: 18,
+    fontFamily: 'Inter',
+    fontWeight: '400',
+    marginHorizontal: 10,
+  },
+  button: {
+    fontSize: 20,
+    fontFamily: 'Inter',
+    fontWeight: '400',
+  },
+
+  Button_Box: {
+    // borderWidth:2,
+    width: '100%',
+    height: 48,
+    backgroundColor: theme.colors.primary,
+    marginTop: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginBottom: 60,
+  },
+  Verify_Text: {
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#FFFFFF',
   },
 });
 
