@@ -7,13 +7,12 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {theme} from '../../constants/theme';
+import {theme} from '../../../constants/theme';
 import {Country, State, City} from 'country-state-city';
 import {Dropdown} from 'react-native-element-dropdown';
 
 import {ScrollView} from 'react-native';
-
-const Registration = ({navigation}) => {
+const AddDetails = ({navigation}) => {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -22,10 +21,6 @@ const Registration = ({navigation}) => {
   const [selectedCity, setSelectedCity] = useState('');
   const [isFocus, setIsFocus] = useState(false);
 
-  const handleCheckboxToggle = checkboxNumber => {
-    setIsChecked1(checkboxNumber === 1);
-    setIsChecked2(checkboxNumber === 2);
-  };
   const countries = Country.getAllCountries();
 
   const countryData = countries.map(country => ({
@@ -68,9 +63,6 @@ const Registration = ({navigation}) => {
   } else {
     console.log('Selected country not found in data:', selectedCountry);
   }
-
-  console.log('Selected State:', selectedState);
-
   const selectedStateData = states.find(state => state.name === selectedState);
 
   if (selectedStateData) {
@@ -89,12 +81,24 @@ const Registration = ({navigation}) => {
   }
   return (
     <ScrollView>
-      <View>
-        <Image
-          source={require('../../Assets/Images/design.png')}
-          style={{width: '100%'}}
-        />
-        <Text style={styles.headerText}>Register</Text>
+      <View style={{width: '90%', alignSelf: 'center'}}>
+        <View style={styles.topBar}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image source={require('../../../Assets/Images/backArrow.png')} />
+          </TouchableOpacity>
+          <Text
+            style={{
+              color: theme.colors.primary,
+              fontSize: 24,
+              fontWeight: '400',
+            }}>
+            Add details
+          </Text>
+          <Image
+            source={require('../../../Assets/Images/backArrow.png')}
+            tintColor="transparent"
+          />
+        </View>
         <View style={styles.input}>
           <Image source={require('../../Assets/Images/name.png')} />
           <TextInput placeholder="Name" style={{fontSize: 16}} />
@@ -248,11 +252,11 @@ const Registration = ({navigation}) => {
           <Image source={require('../../Assets/Images/pinCode.png')} />
           <TextInput placeholder="Pincode" style={{fontSize: 16}} />
         </View>
-        <TouchableOpacity activeOpacity={1} style={styles.Button_Box} onPress={() => navigation.replace('BottomTab')}>
-          <View
-            style={styles.Button}
-            activeOpacity={0.7}
-            >
+        <TouchableOpacity
+          activeOpacity={1}
+          style={styles.Button_Box}
+          onPress={() => navigation.replace('BottomTab')}>
+          <View style={styles.Button} activeOpacity={0.7}>
             <Text style={styles.Verify_Text}>Submit</Text>
           </View>
         </TouchableOpacity>
@@ -262,14 +266,13 @@ const Registration = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  headerText: {
-    color: theme.colors.primary,
-    fontFamily: 'Inter',
-    fontSize: 24,
-    fontStyle: 'normal',
-    fontWeight: '400',
-    textAlign: 'center',
-    marginBottom: 20,
+  topBar: {
+    flexDirection: 'row',
+    width: '100%',
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 30,
   },
   input1: {
     width: '60%',
@@ -383,4 +386,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Registration;
+export default AddDetails;

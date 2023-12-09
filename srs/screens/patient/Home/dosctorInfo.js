@@ -1,20 +1,12 @@
 import React from 'react';
-import {Image, View, Text, TouchableOpacity} from 'react-native';
+import {Image, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 const DoctorInfo = ({navigation, route}) => {
   const {item} = route.params;
 
   return (
     <View>
-      <View
-        style={{
-          width: '100%',
-          alignSelf: 'center',
-          alignItems: 'center',
-          justifyContent: 'center',
-          paddingTop: 10,
-          backgroundColor: 'white',
-        }}>
+      <View style={styles.container}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={{alignSelf: 'flex-start', marginLeft: 10}}>
@@ -49,31 +41,10 @@ const DoctorInfo = ({navigation, route}) => {
           </Text>
           <Text style={{color: '#1C76B3', fontSize: 16}}>₹{item.min_fee}</Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: 30,
-          }}>
-          <View
-            style={{
-              width: '30%',
-              height: 67,
-              backgroundColor: 'white',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 10,
-              gap: 10,
-            }}>
+        <View style={styles.threeViews}>
+          <View style={styles.oneView}>
             <Text style={{color: 'black'}}>Patients</Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '60%',
-                alignSelf: 'center',
-                justifyContent: 'space-between',
-              }}>
+            <View style={{...styles.innerView, width: '60%'}}>
               <Image
                 source={require('../../../Assets/Images/name.png')}
                 style={{width: 15, height: 18}}
@@ -81,46 +52,16 @@ const DoctorInfo = ({navigation, route}) => {
               <Text>{item.patients}+</Text>
             </View>
           </View>
-          <View
-            style={{
-              width: '30%',
-              height: 67,
-              backgroundColor: 'white',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 10,
-              gap: 10,
-            }}>
+          <View style={styles.oneView}>
             <Text style={{color: 'black'}}>Experience</Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '45%',
-                alignSelf: 'center',
-                justifyContent: 'space-between',
-              }}>
+            <View style={styles.innerView}>
               <Text>{item.experience}</Text>
               <Text>Yrs+</Text>
             </View>
           </View>
-          <View
-            style={{
-              width: '30%',
-              height: 67,
-              backgroundColor: 'white',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 10,
-              gap: 10,
-            }}>
+          <View style={styles.oneView}>
             <Text style={{color: 'black'}}>Rating</Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '45%',
-                alignSelf: 'center',
-                justifyContent: 'space-between',
-              }}>
+            <View style={styles.innerView}>
               <Image
                 source={require('../../../Assets/Images/star.png')}
                 style={{width: 18, height: 17}}
@@ -140,31 +81,17 @@ const DoctorInfo = ({navigation, route}) => {
             <Text>9:30 - 4:30 </Text>
           </View>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: 50
-          }}>
-          <View
-            style={{
-              width: '45%',
-              backgroundColor: '#1C76B3',
-              height: 45,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
+        <View style={styles.btns}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => navigation.navigate('ConfirmInfo')}
+            style={styles.bottomBtn}>
             <Text style={{color: 'white', fontSize: 16}}>Confirm</Text>
-          </View>
-          <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate('Locations')}
-            style={{
-              width: '45%',
-              backgroundColor: '#1C76B3',
-              height: 45,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => navigation.navigate('Locations')}
+            style={styles.bottomBtn}>
             <Text style={{color: 'white', fontSize: 16}}>feedback</Text>
           </TouchableOpacity>
         </View>
@@ -172,4 +99,49 @@ const DoctorInfo = ({navigation, route}) => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 10,
+    backgroundColor: 'white',
+  },
+
+  threeViews: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 30,
+  },
+  oneView: {
+    width: '30%',
+    height: 67,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    gap: 10,
+  },
+  innerView: {
+    flexDirection: 'row',
+    width: '45%',
+    alignSelf: 'center',
+    justifyContent: 'space-between',
+  },
+  btns: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 50,
+  },
+  bottomBtn: {
+    width: '45%',
+    backgroundColor: '#1C76B3',
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 export default DoctorInfo;

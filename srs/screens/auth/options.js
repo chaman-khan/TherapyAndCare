@@ -84,7 +84,7 @@ const Options = ({navigation}) => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.continueButton} activeOpacity={1} onPress={() => navigation.replace('PatientStack')}>
+      <TouchableOpacity style={styles.continueButton} activeOpacity={1} onPress={() => navigation.navigate('PatientStack')}>
         <Text style={styles.continueButtonText}>Continue</Text>
       </TouchableOpacity>
     </View>

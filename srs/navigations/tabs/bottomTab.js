@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 const BottomTab = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Request"
+      initialRouteName="Locations"
       screenOptions={({route}) => ({
         tabBarActiveTintColor: '#20B7FE',
         inactiveTintColor: 'gray', // Set your desired inactive color
