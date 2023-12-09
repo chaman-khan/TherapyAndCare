@@ -1,8 +1,24 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import {View} from 'react-native';
 
 const Appointments = () => {
+  const DATA = [
+    {
+      id: 1,
+      date: 'Nov 17',
+      time: '10:30 AM',
+      doctorName: 'Dr. Sonam',
+      specialist: 'Neurological physical therapist',
+    },
+  ];
+
   return (
     <View style={{width: '90%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
@@ -15,39 +31,59 @@ const Appointments = () => {
             fontSize: 24,
             fontWeight: '400',
           }}>
-          Notification Message
+          Appointments
         </Text>
         <Image source={require('../../../Assets/Images/notifi.png')} />
       </View>
-
-      <Text
-        style={{
-          fontSize: 24,
-          fontFamily: 'Inter',
-          width: '90%',
-          alignSelf: 'center',
-          textAlign: 'center',
-          color: 'black',
-        }}>
-        Your therapy appointment has been confirmed
-      </Text>
-      <Text
-        style={{
-          fontSize: 16,
-          fontFamily: 'Inter',
-          textAlign: 'center',
-          marginVertical: 30,
-        }}>
-        You can pay now
-      </Text>
-      <TouchableOpacity
-        activeOpacity={1}
-        style={styles.Button_Box}
-        onPress={() => navigation.navigate('Scheduled', {selectedTime})}>
-        <View style={styles.Button} activeOpacity={0.7}>
-          <Text style={styles.Verify_Text}>Confirm appointment</Text>
-        </View>
-      </TouchableOpacity>
+      <Text style={{fontSize: 20}}>Upcoming</Text>
+      <View>
+        <FlatList
+          data={DATA}
+          renderItem={({item}) => {
+            <View>
+              <View
+                style={{
+                  width: '20%',
+                  backgroundColor: '#1C76B3',
+                  alignItems: 'center',
+                  justifyContent: 'space-evenly',
+                }}>
+                <Text style={{color: 'white', fontSize: 20}}>{item.date}</Text>
+                <Text style={{color: 'white', fontSize: 12}}>{item.time}</Text>
+              </View>
+              <View style={{width: '80%', backgroundColor: '#F9F9F9'}}>
+                <View style={{width: '90%', alignSelf: 'center'}}>
+                  <Text style={{color: 'black'}}>{item.specialist}</Text>
+                  <Text style={{fontSize: 12, color: 'black'}}>
+                    {item.doctorName}
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}>
+                    <Image
+                      source={require('../../../Assets/Images/contact.png')}
+                    />
+                    <TouchableOpacity>Seel Location</TouchableOpacity>
+                    <View
+                      style={{
+                        width: '25%',
+                        height: 24,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                      <Text style={{color: 'white', fontSize: 16}}>Cancel</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>;
+          }}
+          keyExtractor={item => item.id}
+        />
+      </View>
     </View>
   );
 };
@@ -60,22 +96,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 30,
-  },
-  Button_Box: {
-    // borderWidth:2,
-    width: '100%',
-    height: 48,
-    backgroundColor: theme.colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginBottom: 60,
-  },
-  Verify_Text: {
-    fontFamily: 'Poppins',
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#FFFFFF',
   },
 });
 export default Appointments;

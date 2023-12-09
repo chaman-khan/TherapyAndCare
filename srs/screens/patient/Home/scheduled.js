@@ -43,9 +43,9 @@ const Scheduled = ({navigation, route}) => {
       <TouchableOpacity
             activeOpacity={1}
             style={styles.Button_Box}
-            onPress={() => navigation.navigate('AppointmentDetails')}>
+            onPress={() => navigation.navigate('NotificationMessage')}>
             <View style={styles.Button} activeOpacity={0.7}>
-              <Text style={styles.Verify_Text}>Confirm appointment</Text>
+              <Text style={styles.Verify_Text}>Checkout</Text>
             </View>
           </TouchableOpacity>
     </View>

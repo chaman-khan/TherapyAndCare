@@ -9,6 +9,9 @@ import ConfirmInfo from '../../screens/patient/Home/doctorConfirmInfo';
 import AddDetails from '../../screens/patient/Home/addDetails';
 import AppointmentDetails from '../../screens/patient/Home/appointmentSchdule';
 import Scheduled from '../../screens/patient/Home/scheduled';
+import NotificationMessage from '../../screens/patient/Home/notificationMessage';
+import FeedBack from '../../screens/patient/Home/feedBack';
+import AccountDetails from '../../screens/patient/Home/accountDetails';
 
 function PatientStack() {
   const Stack = createNativeStackNavigator();
@@ -51,8 +54,23 @@ function PatientStack() {
         options={{headerShown: false}}
       />
       <Stack.Screen
+        name="NotificationMessage"
+        component={NotificationMessage}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="Scheduled"
         component={Scheduled}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="FeedBack"
+        component={FeedBack}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AccountDetails"
+        component={AccountDetails}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

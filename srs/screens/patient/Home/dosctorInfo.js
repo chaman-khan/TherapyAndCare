@@ -90,7 +90,7 @@ const DoctorInfo = ({navigation, route}) => {
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={1}
-            onPress={() => navigation.navigate('Locations')}
+            onPress={() => navigation.navigate('FeedBack')}
             style={styles.bottomBtn}>
             <Text style={{color: 'white', fontSize: 16}}>feedback</Text>
           </TouchableOpacity>
