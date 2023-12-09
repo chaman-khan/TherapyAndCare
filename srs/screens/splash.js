@@ -1,13 +1,11 @@
 import React from 'react';
 
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {theme} from '../constants/theme';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 const {width, height} = Dimensions.get('screen');
 
-const Splash = () => {
-  const navigation = useNavigation();
+const Splash = ({navigation}) => {
   return (
     <View
       style={{

@@ -14,7 +14,7 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 
-const SignIn = () => {
+const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
@@ -76,13 +76,13 @@ const SignIn = () => {
         [
           {
             text: 'OK',
-            onPress: () => console.log('OK Pressed'),
+            onPress: () => navigation.navigate('BottomTab'),
           },
         ],
         {cancelable: false},
       );
     } else {
-      // navigation.navigate('BottomTab');
+      navigation.navigate('BottomTab');
     }
   };
   return (
@@ -124,7 +124,9 @@ const SignIn = () => {
           justifyContent: 'center',
           alignSelf: 'center',
         }}
-        onPress={handleLogin}>
+        onPress={() => navigation.navigate('Options')}
+        // onPress={handleLogin}
+      >
         <Text style={{color: 'white'}}>Submit</Text>
       </TouchableOpacity>
     </View>

@@ -9,19 +9,11 @@ import {
 } from 'react-native';
 import {theme} from '../../constants/theme';
 import {Country, State, City} from 'country-state-city';
-import {ICountry, IState, ICity} from 'country-state-city';
-import RNPickerSelect from 'react-native-picker-select';
-import Flag from 'react-native-country-flag';
-import CountryStateCityPicker from 'country-state-city';
 import {Dropdown} from 'react-native-element-dropdown';
-import Picker from 'react-native-picker-select';
-import {
-  responsiveScreenFontSize,
-  responsiveScreenHeight,
-} from 'react-native-responsive-dimensions';
+
 import {ScrollView} from 'react-native';
 
-const Registration = () => {
+const Registration = ({navigation}) => {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -34,62 +26,67 @@ const Registration = () => {
     setIsChecked1(checkboxNumber === 1);
     setIsChecked2(checkboxNumber === 2);
   };
-  // console.log('====================================');
-  // console.log(Country.getAllCountries());
-  // console.log('====================================');
   const countries = Country.getAllCountries();
+
   const countryData = countries.map(country => ({
     label: country.flag,
     value: country.name,
     code: country.phonecode,
   }));
 
-  const states = State.getStateByCodeAndCountry(selectedCountry);
-  console.log('====================================');
-  console.log(states);
-  console.log('====================================');
-  const stateData = countries.map(state => ({
-    label: state.name,
-    value: state.name,
-  }));
-  const cities = City.getCitiesOfState(selectedState);
-  const cityData = cities.map(city => ({
-    label: city.name,
-    value: city.name,
-  }));
-
-  // countries.forEach(country => {
-  //   console.log(country.isoCode);
-  // });
-
-  // useEffect(() => {
-  //   // Fetch country data
-  //   const countryData = Country.getAllCountries();
-  //   setCountries(countryData);
-  // }, []);
-
-  const handleCountryChange = country => {
-    setSelectedCountry(country);
-    const states = CountryStateCityPicker.getStatesOfCountry(country);
-    setSelectedState(states[0].isoCode); // Select the first state by default
-    setCities(
-      CountryStateCityPicker.getCitiesOfState(country, states[0].isoCode),
+  useEffect(() => {
+    // Find the country based on the entered country code
+    const countryWithCode = countries.find(
+      country => country.phonecode === countryCode,
     );
-  };
 
-  const handleStateChange = state => {
-    setSelectedState(state);
-    setCities(CountryStateCityPicker.getCitiesOfState(selectedCountry, state));
-  };
-  const handleCityChange = city => {
-    // Handle city change if needed
-    console.log(city);
-  };
-  // console.log(ICountry);
-  // console.log('====================================');
-  // console.log(Country.getAllCountries());
-  // console.log('====================================');
+    if (countryWithCode) {
+      // Update the selected country and country code
+      setSelectedCountry(countryWithCode.name);
+      setCountryCode(countryWithCode.phonecode);
+    }
+  }, [countryCode]);
+  console.log(selectedCountry);
+  const selectedCountryData = countries.find(
+    country => country.name === selectedCountry,
+  );
+  let stateData = [];
+  let cityData = [];
+  let states = [];
 
+  console.log('Selected Country:', selectedCountry);
+
+  if (selectedCountryData) {
+    // Remove the 'let' keyword here
+    states = State.getStatesOfCountry(selectedCountryData.isoCode);
+    console.log('States:', states);
+
+    stateData = states.map(state => ({
+      label: state.name,
+      value: state.name,
+    }));
+  } else {
+    console.log('Selected country not found in data:', selectedCountry);
+  }
+
+  console.log('Selected State:', selectedState);
+
+  const selectedStateData = states.find(state => state.name === selectedState);
+
+  if (selectedStateData) {
+    console.log('Selected state:', selectedState);
+
+    const cities = City.getCitiesOfState(selectedStateData.isoCode);
+    console.log('Cities:', cities);
+
+    cityData = cities.map(city => ({
+      label: city.name,
+      value: city.name,
+    }));
+    console.log('City data:', cityData);
+  } else {
+    console.log('Selected state not found in data:', selectedState);
+  }
   return (
     <ScrollView>
       <View>
@@ -161,16 +158,22 @@ const Registration = () => {
           <TextInput placeholder="Email Address" style={{fontSize: 16}} />
         </View>
 
-        <View>
+        <View
+          style={{
+            width: '90%',
+            flexDirection: 'row',
+            alignSelf: 'center',
+            justifyContent: 'space-between',
+          }}>
           <Dropdown
-            style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
+            style={[styles.dropdown1, isFocus && {borderColor: 'blue'}]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             data={countryData}
             maxHeight={300}
             labelField="label"
             valueField="value"
-            placeholder={!isFocus ? 'Select Country' : 'Select Country'}
+            placeholder={!isFocus ? '...' : '...'}
             value={selectedCountry}
             itemTextStyle={styles.DropDown_Item}
             onFocus={() => setIsFocus(true)}
@@ -181,9 +184,13 @@ const Registration = () => {
               setIsFocus(false);
             }}
           />
-          <View>
-            <Text>{countryCode}</Text>
-            <TextInput placeholder="" />
+          <View style={styles.input1}>
+            <TextInput
+              style={{width: '25%', fontSize: 16}}
+              value={`+${countryCode}`}
+              onChangeText={txt => setCountryCode(txt.replace(/\D/g, ''))}
+            />
+            <TextInput placeholder="Phone Number" style={{width: '70%'}} />
           </View>
         </View>
 
@@ -240,7 +247,10 @@ const Registration = () => {
           <TextInput placeholder="Pincode" style={{fontSize: 16}} />
         </View>
         <View style={styles.Button_Box}>
-          <TouchableOpacity style={styles.Button} activeOpacity={0.7}>
+          <TouchableOpacity
+            style={styles.Button}
+            activeOpacity={0.7}
+            onPress={() => navigation.replace('BottomTab')}>
             <Text style={styles.Verify_Text}>Submit</Text>
           </TouchableOpacity>
         </View>
@@ -258,6 +268,19 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     textAlign: 'center',
     marginBottom: 20,
+  },
+  input1: {
+    width: '60%',
+    height: 50,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    // gap: 30,
+    borderWidth: 0.1,
+    borderColor: theme.colors.grey,
+    borderRadius: 1,
+    paddingHorizontal: 15,
   },
   input: {
     width: '90%',
@@ -308,12 +331,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
+    marginBottom: 60
   },
   Verify_Text: {
     fontFamily: 'Poppins',
     fontSize: 16,
     fontWeight: '600',
     color: '#FFFFFF',
+  },
+  dropdown1: {
+    width: '35%',
+    height: 50,
+    borderColor: theme.colors.grey,
+    borderWidth: 0.3,
+    borderRadius: 6,
+    paddingHorizontal: 17,
   },
   dropdown: {
     width: '45%',

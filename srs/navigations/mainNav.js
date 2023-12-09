@@ -6,6 +6,7 @@ import SignIn from '../screens/auth/signin';
 import Options from '../screens/auth/options';
 import OTPVerification from '../screens/auth/otpverify';
 import PatientStack from './stacks/patientStack';
+import BottomTab from './tabs/bottomTab';
 
 function MainNav() {
   const Stack = createNativeStackNavigator();
@@ -13,13 +14,14 @@ function MainNav() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="PatientStack"
+        initialRouteName="Splash"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="OTPVerification" component={OTPVerification} />
         <Stack.Screen name="Options" component={Options} />
         <Stack.Screen name="PatientStack" component={PatientStack} />
+        <Stack.Screen name="BottomTab" component={BottomTab} />
       </Stack.Navigator>
     </NavigationContainer>
   );

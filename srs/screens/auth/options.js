@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {theme} from '../../constants/theme';
 
-const Options = () => {
+const Options = ({navigation}) => {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
 
@@ -84,9 +84,9 @@ const Options = () => {
         </View>
       </TouchableOpacity>
 
-      <View style={styles.continueButton}>
+      <TouchableOpacity style={styles.continueButton} activeOpacity={1} onPress={() => navigation.replace('PatientStack')}>
         <Text style={styles.continueButtonText}>Continue</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
