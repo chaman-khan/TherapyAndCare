@@ -1,8 +1,9 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {View} from 'react-native';
+import { theme } from '../../../constants/theme';
 
-const NotificationMessage = () => {
+const NotificationMessage = ({navigation}) => {
   return (
     <View style={{width: '90%', alignSelf: 'center'}}>
       <View style={styles.topBar}>

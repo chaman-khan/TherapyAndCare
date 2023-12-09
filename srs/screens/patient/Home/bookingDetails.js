@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import {Image, StyleSheet, Text} from 'react-native';
 import {View} from 'react-native';
+import { theme } from '../../../constants/theme';
 
-const BookingDetails = () => {
+const BookingDetails = ({navigation}) => {
     const [name, setName] = useState('Mohit kumar')
     const [age, setAge] = useState('40')
     const [concern, setConcern] = useState('Neurological physical')

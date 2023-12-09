@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image, View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { theme } from '../../../constants/theme';
 
 const DoctorInfo = ({navigation, route}) => {
   const {item} = route.params;
@@ -12,7 +13,6 @@ const DoctorInfo = ({navigation, route}) => {
           style={{alignSelf: 'flex-start', marginLeft: 10}}>
           <Image source={require('../../../Assets/Images/backArrow.png')} />
         </TouchableOpacity>
-
         <Image
           source={item.image}
           style={{width: 116, height: 116, marginVertical: 20}}

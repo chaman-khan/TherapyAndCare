@@ -7,8 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {View} from 'react-native';
+import { theme } from '../../../constants/theme';
 
-const Appointments = () => {
+const Appointments = ({navigation}) => {
   const DATA = [
     {
       id: 1,
@@ -18,6 +19,48 @@ const Appointments = () => {
       specialist: 'Neurological physical therapist',
     },
   ];
+  const renderItem = ({item}) => {
+    return (
+      <View>
+        <View
+          style={{
+            width: '20%',
+            backgroundColor: '#1C76B3',
+            alignItems: 'center',
+            justifyContent: 'space-evenly',
+          }}>
+          <Text style={{color: 'white', fontSize: 20}}>{item.date}</Text>
+          <Text style={{color: 'white', fontSize: 12}}>{item.time}</Text>
+        </View>
+        <View style={{width: '80%', backgroundColor: '#F9F9F9'}}>
+          <View style={{width: '90%', alignSelf: 'center'}}>
+            <Text style={{color: 'black'}}>{item.specialist}</Text>
+            <Text style={{fontSize: 12, color: 'black'}}>
+              {item.doctorName}
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <Image source={require('../../../Assets/Images/contact.png')} />
+              <TouchableOpacity>Seel Location</TouchableOpacity>
+              <View
+                style={{
+                  width: '25%',
+                  height: 24,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Text style={{color: 'white', fontSize: 16}}>Cancel</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  };
 
   return (
     <View style={{width: '90%', alignSelf: 'center'}}>
@@ -39,48 +82,7 @@ const Appointments = () => {
       <View>
         <FlatList
           data={DATA}
-          renderItem={({item}) => {
-            <View>
-              <View
-                style={{
-                  width: '20%',
-                  backgroundColor: '#1C76B3',
-                  alignItems: 'center',
-                  justifyContent: 'space-evenly',
-                }}>
-                <Text style={{color: 'white', fontSize: 20}}>{item.date}</Text>
-                <Text style={{color: 'white', fontSize: 12}}>{item.time}</Text>
-              </View>
-              <View style={{width: '80%', backgroundColor: '#F9F9F9'}}>
-                <View style={{width: '90%', alignSelf: 'center'}}>
-                  <Text style={{color: 'black'}}>{item.specialist}</Text>
-                  <Text style={{fontSize: 12, color: 'black'}}>
-                    {item.doctorName}
-                  </Text>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}>
-                    <Image
-                      source={require('../../../Assets/Images/contact.png')}
-                    />
-                    <TouchableOpacity>Seel Location</TouchableOpacity>
-                    <View
-                      style={{
-                        width: '25%',
-                        height: 24,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}>
-                      <Text style={{color: 'white', fontSize: 16}}>Cancel</Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </View>;
-          }}
+          renderItem={renderItem}
           keyExtractor={item => item.id}
         />
       </View>

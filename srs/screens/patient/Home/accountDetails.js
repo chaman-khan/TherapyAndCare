@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {Image, StyleSheet, Switch, TextInput, View} from 'react-native';
 import {Text} from 'react-native-elements';
+import { theme } from '../../../constants/theme';
 
-const AccountDetails = () => {
+const AccountDetails = ({navigation}) => {
   const [fee, setFee] = useState('200');
   const [creditCardNumber, setCreditCardNumber] = useState('');
   const [cvv, setCVV] = useState('');
@@ -52,8 +53,8 @@ const AccountDetails = () => {
       </View>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Image source={require('../../../Assets/Images/visa.png')} />
-        <Image source={require('../../../Assets/Images/master.png')} />
-        <Image source={require('../../../Assets/Images/rupay.png')} />
+        <Image source={require('../../../Assets/Images/MasterCard.png')} />
+        <Image source={require('../../../Assets/Images/Rupay.png')} />
         <Image source={require('../../../Assets/Images/paypal.png')} />
       </View>
       <View
@@ -125,12 +126,12 @@ const AccountDetails = () => {
       <View>
         <Text>Save card data for future payment</Text>
         <Switch
-        trackColor={{ false: '#767577', true: '#81b0ff' }}
-        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-      />
+          trackColor={{false: '#767577', true: '#81b0ff'}}
+          thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
       </View>
     </View>
   );
