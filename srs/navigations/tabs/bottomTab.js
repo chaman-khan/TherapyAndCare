@@ -6,6 +6,7 @@ import Home from '../../screens/patient/Home/home';
 import Locations from '../../screens/patient/Locations/locations';
 import Appointments from '../../screens/patient/Appointments/appointments';
 import Profile from '../../screens/patient/Profile/profile';
+import AppointmentStack from '../stacks/appointmentStack';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -13,10 +14,10 @@ const Stack = createNativeStackNavigator();
 const BottomTab = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Appointments"
+      initialRouteName="Profile"
       screenOptions={({route}) => ({
         tabBarActiveTintColor: '#20B7FE',
-        inactiveTintColor: 'gray', // Set your desired inactive color
+        inactiveTintColor: 'gray', 
         tabBarStyle: {
           backgroundColor: 'white',
           position: 'relative',
@@ -40,7 +41,7 @@ const BottomTab = () => {
             iconName = require('../../Assets/Images/home.png');
           } else if (Screen_name === 'Locations') {
             iconName = require('../../Assets/Images/locations.png');
-          } else if (Screen_name === 'Appointments') {
+          } else if (Screen_name === 'AppointmentStack') {
             iconName = require('../../Assets/Images/Appointments.png');
           } else if (Screen_name === 'Profile') {
             iconName = require('../../Assets/Images/profile.png');
@@ -71,10 +72,11 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="Appointments"
-        component={Appointments}
+        name="AppointmentStack"
+        component={AppointmentStack}
         options={{
           headerShown: false,
+          title: 'Appointment',
         }}
       />
       <Tab.Screen

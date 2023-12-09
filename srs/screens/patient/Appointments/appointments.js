@@ -6,13 +6,22 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import { theme } from '../../../constants/theme';
 
+const {height} = Dimensions.get('screen');
 const Appointments = ({navigation}) => {
   const DATA = [
     {
       id: 1,
+      date: 'Nov 17',
+      time: '10:30 AM',
+      doctorName: 'Dr. Sonam',
+      specialist: 'Neurological physical therapist',
+    },
+    {
+      id: 2,
       date: 'Nov 17',
       time: '10:30 AM',
       doctorName: 'Dr. Sonam',
@@ -51,7 +60,7 @@ const Appointments = ({navigation}) => {
   ]
   const renderItem = ({item}) => {
     return (
-      <View style={{flexDirection: 'row', height: 104}}>
+      <TouchableOpacity style={{flexDirection: 'row', height: 104, marginVertical: 10}} activeOpacity={1} onPress={() => navigation.navigate('FreeCanceltion')}>
         <View
           style={{
             width: '30%',
@@ -90,23 +99,21 @@ const Appointments = ({navigation}) => {
             </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   const renderItem1 = ({item}) => {
     return (
-      <View style={{flexDirection: 'row', height: 104, marginVertical: 10, justifyContent: 'space-between'}}>
-        <View
-          style={{
+      <View style={{flexDirection: 'row', paddingVertical: 20, justifyContent: 'space-between', borderColor: theme.colors.grey, borderBottomWidth: 0.5}}>
+        
+          <Image source={item.image} style={{
             width: '35%',
             height: 94,
             backgroundColor: '#1C76B3',
             alignItems: 'center',
             justifyContent: 'space-evenly',
-          }}>
-          <Image source={item.image} />
-        </View>
-        <View style={{width: '65%', backgroundColor: '#F9F9F9', alignSelf: 'flex-end'}}>
+          }}/>
+        <View style={{width: '65%', backgroundColor: '#F9F9F9', alignSelf: 'flex-end', height: 94}}>
           <View style={{width: '90%', alignSelf: 'center'}}>
             <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>{item.type}</Text>
             <Text style={{fontSize: 12, marginTop: 10}}>
@@ -117,7 +124,7 @@ const Appointments = ({navigation}) => {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                marginTop: 30
+                marginTop: 15
               }}>
               <View style={{flexDirection: 'row', gap: 10}}>
               <Image source={require('../../../Assets/Images/star.png')} />
@@ -157,7 +164,7 @@ const Appointments = ({navigation}) => {
         <Image source={require('../../../Assets/Images/notifi.png')}  tintColor='transparent'/>
       </View>
       <Text style={{fontSize: 20, color: 'black', fontFamily: 'Inter'}}>Upcoming</Text>
-      <View style={{marginVertical: 10}}>
+      <View style={{marginVertical: 10, height: height/7}}>
         <FlatList
           data={DATA}
           renderItem={renderItem}
@@ -165,7 +172,7 @@ const Appointments = ({navigation}) => {
         />
       </View>
       <Text style={{fontSize: 20, color: 'black', fontFamily: 'Inter', marginTop: 40}}>History</Text>
-      <View style={{marginVertical: 10}}>
+      <View style={{marginVertical: 10, height: height/2}}>
         <FlatList
           data={DATA1}
           renderItem={renderItem1}
