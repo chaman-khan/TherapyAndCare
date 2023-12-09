@@ -115,7 +115,7 @@ const ConfirmInfo = ({navigation}) => {
           justifyContent: 'center',
           alignSelf: 'center',
         }} activeOpacity={1}
-        onPress={() => navigation.navigate('AddDetails')}
+        onPress={() => navigation.navigate('PatientStack',{screen: 'AddDetails'} )}
         // onPress={handleLogin}
       >
         <Text style={{color: 'white'}}>Continue</Text>

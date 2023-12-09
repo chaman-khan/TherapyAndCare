@@ -12,12 +12,13 @@ import Scheduled from '../../screens/patient/Home/scheduled';
 import NotificationMessage from '../../screens/patient/Home/notificationMessage';
 import FeedBack from '../../screens/patient/Home/feedBack';
 import AccountDetails from '../../screens/patient/Home/accountDetails';
+import BookingDetails from '../../screens/patient/Home/bookingDetails';
 
 function PatientStack() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <Stack.Navigator initialRouteName='ConfirmInfo' screenOptions={{headerShown: false}}>
+    <Stack.Navigator initialRouteName='BottomTab' screenOptions={{headerShown: false}}>
       <Stack.Screen
         name="Registration"
         component={Registration}
@@ -71,6 +72,11 @@ function PatientStack() {
       <Stack.Screen
         name="AccountDetails"
         component={AccountDetails}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="BookingDetails"
+        component={BookingDetails}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

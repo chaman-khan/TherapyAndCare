@@ -1,7 +1,14 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, Switch, TextInput, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Switch,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import {Text} from 'react-native-elements';
-import { theme } from '../../../constants/theme';
+import {theme} from '../../../constants/theme';
 
 const AccountDetails = ({navigation}) => {
   const [fee, setFee] = useState('200');
@@ -51,7 +58,7 @@ const AccountDetails = ({navigation}) => {
           tintColor="transparent"
         />
       </View>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20}}>
         <Image source={require('../../../Assets/Images/visa.png')} />
         <Image source={require('../../../Assets/Images/MasterCard.png')} />
         <Image source={require('../../../Assets/Images/Rupay.png')} />
@@ -67,15 +74,15 @@ const AccountDetails = ({navigation}) => {
         <Image source={require('../../../Assets/Images/gpay.png')} />
         <Image source={require('../../../Assets/Images/paytm.png')} />
       </View>
-      <View style={{flexDirection: 'row', gap: 5}}>
-        <Text style={{color: black}}>Your have to pay : </Text>
-        <Text>{fee}</Text>
+      <View style={{flexDirection: 'row', gap: 5, alignSelf: 'center', marginVertical: 40}}>
+        <Text style={{color: 'black'}}>Your have to pay : </Text>
+        <Text>₹{fee}</Text>
       </View>
       <View>
         <Text>Card number</Text>
         <TextInput
           style={styles.input}
-          placeholder="Enter Credit Card Number"
+          placeholder="XXXX XXXX XXXX XXXX"
           keyboardType="numeric"
           value={creditCardNumber}
           onChangeText={text => formatCreditCardNumber(text)}
@@ -85,13 +92,15 @@ const AccountDetails = ({navigation}) => {
       <View
         style={{
           width: '100%',
+          flexDirection: 'row',
           alignSelf: 'center',
           justifyContent: 'space-between',
+          marginVertical: 20
         }}>
-        <View>
+        <View style={{width: '45%'}}>
           <Text>Expiration date</Text>
           <TextInput
-            style={[...styles.input, {width: '45%'}]}
+            style={{...styles.input}}
             placeholder="MM / YY"
             keyboardType="numeric"
             value={expiryDate}
@@ -99,10 +108,10 @@ const AccountDetails = ({navigation}) => {
             maxLength={7} // Adjust based on your needs
           />
         </View>
-        <View>
+        <View style={{width: '45%'}}>
           <Text style={{color: '#1C76B3'}}>CVV</Text>
           <TextInput
-            style={[...styles.input, {width: '45%'}]}
+            style={{...styles.input}}
             placeholder=" . . ."
             keyboardType="numeric"
             value={cvv}
@@ -111,23 +120,23 @@ const AccountDetails = ({navigation}) => {
           />
         </View>
       </View>
-      <View>
+      <View style={{marginBottom: 35}}>
         <Text>Card holder’s name</Text>
-        <TextInput value={name} onChangeText={txt => setName(txt)} />
+        <TextInput style={styles.input} value={name} onChangeText={txt => setName(txt)} />
       </View>
       <TouchableOpacity
         activeOpacity={1}
         style={styles.Button_Box}
-        onPress={() => navigation.navigate('Scheduled', {selectedTime})}>
+        onPress={() => navigation.navigate('BookingDetails')}>
         <View style={styles.Button} activeOpacity={0.7}>
           <Text style={styles.Verify_Text}>Pay</Text>
         </View>
       </TouchableOpacity>
-      <View>
+      <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
         <Text>Save card data for future payment</Text>
         <Switch
           trackColor={{false: '#767577', true: '#81b0ff'}}
-          thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+          thumbColor={isEnabled ? '#f4f3f4' : '#f4f3f4'}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={isEnabled}
@@ -138,10 +147,18 @@ const AccountDetails = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  topBar: {
+    flexDirection: 'row',
+    width: '100%',
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 30,
+  },
   input: {
-    height: 40,
+    height: 50,
     borderColor: 'gray',
-    borderWidth: 1,
+    borderWidth: 0.3,
     borderRadius: 5,
     padding: 10,
   },
@@ -153,7 +170,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    marginBottom: 60,
+    marginBottom: 30,
   },
   Verify_Text: {
     fontFamily: 'Poppins',

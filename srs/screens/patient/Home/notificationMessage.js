@@ -18,7 +18,7 @@ const NotificationMessage = ({navigation}) => {
           }}>
           Notification Message
         </Text>
-        <Image source={require('../../../Assets/Images/notifi.png')} />
+        <Image source={require('../../../Assets/Images/notifi.png')} tintColor='#1C76B3' />
       </View>
 
       <Text
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     height: 60,
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 30,
+    marginBottom: 150,
   },
   Button_Box: {
     // borderWidth:2,
