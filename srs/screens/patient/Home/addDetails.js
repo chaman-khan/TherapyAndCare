@@ -16,18 +16,13 @@ const AddDetails = ({navigation}) => {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState('');
-  const [countryCode, setCountryCode] = useState('');
+  const [countryCode, setCountryCode] = useState('91');
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [isFocus, setIsFocus] = useState(false);
 
   const countries = Country.getAllCountries();
 
-  const countryData = countries.map(country => ({
-    label: country.flag,
-    value: country.name,
-    code: country.phonecode,
-  }));
 
   useEffect(() => {
     // Find the country based on the entered country code
@@ -100,116 +95,41 @@ const AddDetails = ({navigation}) => {
           />
         </View>
         <View style={styles.input}>
-          <Image source={require('../../Assets/Images/name.png')} />
-          <TextInput placeholder="Name" style={{fontSize: 16}} />
+          <TextInput placeholder="Patient name" style={{fontSize: 16}} />
         </View>
-        <View style={{width: '80%', alignSelf: 'center'}}>
-          <View
-            style={{
-              flexDirection: 'row',
-              width: '70%',
-              alignSelf: 'flex-start',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={() => handleCheckboxToggle(1)}>
-              <View style={styles.checkboxView}>
-                <View
-                  style={[
-                    styles.checkbox,
-                    // {backgroundColor: isChecked1 ? theme.colors.primary : 'white'},
-                  ]}>
-                  <View
-                    style={{
-                      width: 10,
-                      height: 10,
-                      backgroundColor: isChecked1
-                        ? theme.colors.primary
-                        : 'transparent',
-                      borderRadius: 5,
-                    }}></View>
-                </View>
-                <Text style={styles.checkboxText}>Male</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={() => handleCheckboxToggle(2)}>
-              <View style={styles.checkboxView}>
-                <View
-                  style={[
-                    styles.checkbox,
-                    // {backgroundColor: isChecked1 ? theme.colors.primary : 'white'},
-                  ]}>
-                  <View
-                    style={{
-                      width: 10,
-                      height: 10,
-                      backgroundColor: isChecked2
-                        ? theme.colors.primary
-                        : 'transparent',
-                      borderRadius: 5,
-                    }}></View>
-                </View>
-                <Text style={styles.checkboxText}>Female</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+        <View style={{...styles.input, justifyContent: 'space-between'}}>
+          <TextInput placeholder="Patient age" style={{fontSize: 16}} />
+          <Image source={require('../../../Assets/Images/downArrow.png')} />
         </View>
-        <View style={styles.input}>
-          <Image source={require('../../Assets/Images/email.png')} />
-          <TextInput placeholder="Email Address" style={{fontSize: 16}} />
-        </View>
-
+{/* 
         <View
           style={{
-            width: '90%',
+            width: '100%',
             flexDirection: 'row',
             alignSelf: 'center',
             justifyContent: 'space-between',
-          }}>
-          <Dropdown
-            style={[styles.dropdown1, isFocus && {borderColor: 'blue'}]}
-            placeholderStyle={styles.placeholderStyle}
-            selectedTextStyle={styles.selectedTextStyle}
-            data={countryData}
-            maxHeight={300}
-            labelField="label"
-            valueField="value"
-            placeholder={!isFocus ? '...' : '...'}
-            value={selectedCountry}
-            itemTextStyle={styles.DropDown_Item}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            onChange={item => {
-              setSelectedCountry(item.value);
-              setCountryCode(item.code);
-              setIsFocus(false);
-            }}
-          />
-          <View style={styles.input1}>
+          }}> */}
+          
+          <View style={styles.input}>
             <TextInput
-              style={{width: '25%', fontSize: 16}}
+              style={{ fontSize: 16}}
               value={`+${countryCode}`}
               onChangeText={txt => setCountryCode(txt.replace(/\D/g, ''))}
             />
-            <TextInput placeholder="Phone Number" style={{width: '70%'}} />
+            <TextInput placeholder="Phone Number"  />
           </View>
-        </View>
+        {/* </View> */}
 
         <View style={styles.input}>
-          <Image source={require('../../Assets/Images/address.png')} />
-          <TextInput placeholder="address" style={{fontSize: 16}} />
+          <TextInput placeholder="Patient address" style={{fontSize: 16}} />
         </View>
         <View
           style={{
-            width: '90%',
+            width: '100%',
             flexDirection: 'row',
             alignSelf: 'center',
             justifyContent: 'space-between',
+            marginVertical: 10
           }}>
           <Dropdown
             style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
@@ -249,13 +169,13 @@ const AddDetails = ({navigation}) => {
           />
         </View>
         <View style={styles.input}>
-          <Image source={require('../../Assets/Images/pinCode.png')} />
+          <Image source={require('../../../Assets/Images/pinCode.png')} />
           <TextInput placeholder="Pincode" style={{fontSize: 16}} />
         </View>
         <TouchableOpacity
           activeOpacity={1}
           style={styles.Button_Box}
-          onPress={() => navigation.replace('BottomTab')}>
+          onPress={() => navigation.navigate('AppointmentDetails')}>
           <View style={styles.Button} activeOpacity={0.7}>
             <Text style={styles.Verify_Text}>Submit</Text>
           </View>
@@ -275,63 +195,34 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   input1: {
-    width: '60%',
-    height: 50,
+    width: '100%',
+    height: 52,
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
     // gap: 30,
-    borderWidth: 0.1,
+    borderWidth: 0.5,
     borderColor: theme.colors.grey,
     borderRadius: 1,
     paddingHorizontal: 15,
   },
   input: {
-    width: '90%',
-    height: 60,
+    width: '100%',
+    height: 52,
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 30,
-    borderWidth: 0.1,
+    borderWidth: 0.5,
     borderColor: theme.colors.grey,
     borderRadius: 1,
-    marginVertical: 7,
+    marginVertical: 10,
     paddingHorizontal: 15,
-  },
-  checkboxView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 50,
-    width: '100%',
-    alignSelf: 'flex-start',
-    alignItems: 'center',
-
-    // justifyContent: 'flex-start',
-
-    // paddingHorizontal: 20,
-    // marginVertical: 15,
-  },
-  checkbox: {
-    width: 20,
-    height: 20,
-    borderWidth: 2,
-    borderColor: theme.colors.primary,
-    borderRadius: 10,
-    marginRight: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checkboxText: {
-    fontSize: 16,
-    fontFamily: 'Inter',
-    fontWeight: '400',
-    color: 'black',
   },
   Button_Box: {
     // borderWidth:2,
-    width: '90%',
+    width: '100%',
     height: 48,
     backgroundColor: theme.colors.primary,
     marginTop: 30,
@@ -359,7 +250,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: theme.colors.grey,
     borderWidth: 0.3,
-    borderRadius: 6,
+    // borderRadius: 6,
     paddingHorizontal: 30,
   },
   // DropDown_Item: {
