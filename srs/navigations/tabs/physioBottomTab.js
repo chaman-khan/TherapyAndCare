@@ -2,17 +2,15 @@ import React from 'react';
 import {Image} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from '../../screens/patient/Home/home';
-import Locations from '../../screens/patient/Locations/locations';
-import Appointments from '../../screens/patient/Appointments/appointments';
-import Profile from '../../screens/patient/Profile/profile';
-import AppointmentStack from '../stacks/appointmentStack';
-import PatientStack from '../stacks/patientStack';
+import Home from '../../screens/physiotherapy/Home/home';
+import Location from '../../screens/physiotherapy/Location/location';
+import Appointment from '../../screens/physiotherapy/Appointment/appointment';
+import Profile from '../../screens/physiotherapy/Profile/profile';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const BottomTab = () => {
+const PhysioBottomtab = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -60,24 +58,23 @@ const BottomTab = () => {
       })}>
       <Tab.Screen
         name="Home"
-        component={PatientStack}
+        component={Home}
         options={{
           headerShown: false,
         }}
       />
       <Tab.Screen
         name="Locations"
-        component={Locations}
+        component={Location}
         options={{
           headerShown: false,
         }}
       />
       <Tab.Screen
-        name="AppointmentStack"
-        component={AppointmentStack}
+        name="Appointment"
+        component={Appointment}
         options={{
           headerShown: false,
-          title: 'Appointment',
         }}
       />
       <Tab.Screen
@@ -91,4 +88,4 @@ const BottomTab = () => {
   );
 };
 
-export default BottomTab;
+export default PhysioBottomtab;

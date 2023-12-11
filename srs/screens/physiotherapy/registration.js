@@ -290,7 +290,7 @@ const Registration = ({navigation}) => {
         <TouchableOpacity
           activeOpacity={1}
           style={styles.Button_Box}
-          onPress={() => navigation.replace('BottomTab')}>
+          onPress={() => navigation.replace('PhysioBottomtab')}>
           <View style={styles.Button} activeOpacity={0.7}>
             <Text style={styles.Verify_Text}>Submit</Text>
           </View>
