@@ -1,24 +1,32 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import { theme } from '../../../constants/theme';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {theme} from '../../../constants/theme';
 
 const CancelationPolicy = ({navigation}) => {
-    const [isChecked1, setIsChecked1] = useState(false);
-  const [isChecked2, setIsChecked2] = useState(false);
-  const [isChecked3, setIsChecked3] = useState(false);
-  const [isChecked4, setIsChecked4] = useState(false);
-  const [isChecked5, setIsChecked5] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const handleCheckboxToggle = checkboxNumber => {
-    setIsChecked1(checkboxNumber === 1);
-    setIsChecked2(checkboxNumber === 2);
-    setIsChecked3(checkboxNumber === 3);
-    setIsChecked4(checkboxNumber === 4);
-    setIsChecked5(checkboxNumber === 5);
-    console.log('====================================');
-    console.log(checkboxNumber.value);
-    console.log('====================================');
-    setMessage(checkboxNumber.value);
+    setSelectedItem(selectedItem === checkboxNumber ? null : checkboxNumber);
+  };
 
+  const generateMessage = () => {
+    // Customize this part based on your requirements
+    const messages = {
+      1: 'I don’t want physiotherapy',
+      2: 'I Changed my mood',
+      3: 'Fee structure is too high',
+      4: 'Lorem Ipsum is simply dummy',
+      5: 'Lorem Ipsum is simply dummy',
+    };
+
+    return selectedItem ? messages[selectedItem] : '';
   };
   const [message, setMessage] = useState('');
   return (
@@ -40,136 +48,83 @@ const CancelationPolicy = ({navigation}) => {
           tintColor="transparent"
         />
       </View>
-      <Text style={{color: 'black', fontSize: 20}}>Reasons</Text>
-      <View
-          style={{
-            width: '100%',
-            alignSelf: 'center',
-            alignItems: 'flex-start',
-            marginTop: 10,
-            // justifyContent: 'flex-start',
-          }}>
+      <ScrollView>
+        <View>
+          <Text style={{color: 'black', fontSize: 20}}>Reasons</Text>
+          <View
+            style={{
+              width: '100%',
+              alignSelf: 'center',
+              alignItems: 'flex-start',
+              marginTop: 10,
+              // justifyContent: 'flex-start',
+            }}>
+            {Array.from({length: 5}, (_, i) => i + 1).map(checkboxNumber => (
+              <TouchableOpacity
+                key={checkboxNumber}
+                activeOpacity={1}
+                onPress={() => handleCheckboxToggle(checkboxNumber)}
+                style={styles.checkboxView}>
+                <View style={[styles.checkbox]}>
+                  <View
+                    style={{
+                      width: 10,
+                      height: 10,
+                      backgroundColor:
+                        selectedItem === checkboxNumber
+                          ? theme.colors.primary
+                          : 'transparent',
+                      borderRadius: 5,
+                    }}></View>
+                </View>
+                <Text style={styles.checkboxText}>
+                  {checkboxNumber === 1
+                    ? 'I don’t want physiotherapy'
+                    : checkboxNumber === 2
+                    ? 'I Changed my mood'
+                    : checkboxNumber === 3
+                    ? 'Fee structure is too high'
+                    : checkboxNumber === 4
+                    ? 'Lorem Ipsum is simply dummy'
+                    : 'Lorem Ipsum is simply dummy'}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <TextInput
+            placeholder="Add your message"
+            style={{
+              width: '100%',
+              alignSelf: 'center',
+              height: 116,
+              backgroundColor: '#F6F6F6',
+              textAlign: 'center',
+              borderColor: '#86CEFF',
+              borderWidth: 1,
+              borderRadius: 6,
+              marginTop: 20,
+            }}
+            value={generateMessage()}
+          />
           <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => handleCheckboxToggle(1)}
-            style={styles.checkboxView}>
-            <View style={[styles.checkbox]}>
-              <View
-                style={{
-                  width: 10,
-                  height: 10,
-                  backgroundColor: isChecked1
-                    ? theme.colors.primary
-                    : 'transparent',
-                  borderRadius: 5,
-                }}></View>
-            </View>
-            <Text style={styles.checkboxText}>I don’t want physiotherapy</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => handleCheckboxToggle(2)}
-            style={styles.checkboxView}>
-            <View style={[styles.checkbox]}>
-              <View
-                style={{
-                  width: 10,
-                  height: 10,
-                  backgroundColor: isChecked2
-                    ? theme.colors.primary
-                    : 'transparent',
-                  borderRadius: 5,
-                }}></View>
-            </View>
-            <Text style={styles.checkboxText}>I Changed my mood</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => handleCheckboxToggle(3)}
-            style={styles.checkboxView}>
-            <View
-              style={
-                styles.checkbox}>
-              <View
-                style={{
-                  width: 10,
-                  height: 10,
-                  backgroundColor: isChecked3
-                    ? theme.colors.primary
-                    : 'transparent',
-                  borderRadius: 5,
-                }}></View>
-            </View>
-            <Text style={styles.checkboxText}>Fee structure is too high</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => handleCheckboxToggle(4)}
-            style={styles.checkboxView}>
-            <View
-              style={
-                styles.checkbox}>
-              <View
-                style={{
-                  width: 10,
-                  height: 10,
-                  backgroundColor: isChecked4
-                    ? theme.colors.primary
-                    : 'transparent',
-                  borderRadius: 5,
-                }}></View>
-            </View>
-            <Text style={styles.checkboxText}>Lorem Ipsum is simply dummy</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => handleCheckboxToggle(5)}
-            style={styles.checkboxView}>
-            <View
-              style={
-                styles.checkbox}>
-              <View
-                style={{
-                  width: 10,
-                  height: 10,
-                  backgroundColor: isChecked5
-                    ? theme.colors.primary
-                    : 'transparent',
-                  borderRadius: 5,
-                }}></View>
-            </View>
-            <Text style={styles.checkboxText}>Lorem Ipsum is simply dummy</Text>
+            style={{
+              height: 50,
+              width: '100%',
+              backgroundColor: theme.colors.primary,
+              marginTop: 50,
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignSelf: 'center',
+              marginBottom: 100
+            }}
+            onPress={() => {
+              const message1 = generateMessage();
+              navigation.navigate('CancelationFeePolicy', {message1});
+            }}>
+            <Text style={{color: 'white'}}>Continue</Text>
           </TouchableOpacity>
         </View>
-        <TextInput
-          placeholder="Add your message"
-          style={{
-            width: '100%',
-            alignSelf: 'center',
-            height: 116,
-            backgroundColor: '#F6F6F6',
-            textAlign: 'center',
-            borderColor: '#86CEFF',
-            borderWidth: 1,
-            borderRadius: 6,
-            marginTop: 20,
-          }}
-        />
-        <TouchableOpacity
-          style={{
-            height: 50,
-            width: '100%',
-            backgroundColor: theme.colors.primary,
-            marginVertical: 50,
-            alignItems: 'center',
-            justifyContent: 'center',
-            alignSelf: 'center',
-          }}
-          onPress={() => navigation.navigate('CancelationFeePolicy', {})}
-        >
-          <Text style={{color: 'white'}}>Continue</Text>
-        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
@@ -193,7 +148,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     backgroundColor: '#FAFAFA',
     marginVertical: 5,
-    paddingHorizontal: 10  },
+    paddingHorizontal: 10,
+  },
   checkbox: {
     width: 20,
     height: 20,

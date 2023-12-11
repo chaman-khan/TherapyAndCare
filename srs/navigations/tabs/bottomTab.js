@@ -15,7 +15,7 @@ const Stack = createNativeStackNavigator();
 const BottomTab = () => {
   return (
     <Tab.Navigator
-      initialRouteName="PatientStack"
+      initialRouteName="AppointmentStack"
       screenOptions={({route}) => ({
         tabBarActiveTintColor: '#20B7FE',
         inactiveTintColor: 'gray', 
