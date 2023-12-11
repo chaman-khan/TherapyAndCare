@@ -6,6 +6,8 @@ import SignIn from '../screens/auth/signin';
 import Options from '../screens/auth/options';
 import OTPVerification from '../screens/auth/otpverify';
 import BottomTab from './tabs/bottomTab';
+import PhysioTherapyStack from './stacks/physiotherapyStack';
+import PatientStack from './stacks/patientStack';
 
 function MainNav() {
   const Stack = createNativeStackNavigator();
@@ -19,7 +21,8 @@ function MainNav() {
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="OTPVerification" component={OTPVerification} />
         <Stack.Screen name="Options" component={Options} />
-        <Stack.Screen name="BottomTab" component={BottomTab} />
+        <Stack.Screen name="PatientStack" component={PatientStack} />
+        <Stack.Screen name="PhysioTherapyStack" component={PhysioTherapyStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );

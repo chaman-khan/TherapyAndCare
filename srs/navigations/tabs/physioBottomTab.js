@@ -60,7 +60,7 @@ const BottomTab = () => {
       })}>
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={PatientStack}
         options={{
           headerShown: false,
         }}

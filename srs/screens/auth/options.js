@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Button,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {theme} from '../../constants/theme';
 
@@ -84,7 +85,16 @@ const Options = ({navigation}) => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.continueButton} activeOpacity={1} onPress={() => navigation.navigate('BottomTab')}>
+      <TouchableOpacity
+        style={styles.continueButton}
+        activeOpacity={1}
+        onPress={() => {
+          isChecked1
+            ? navigation.navigate('PhysioTherapyStack')
+            : isChecked2
+            ? navigation.navigate('PatientStack')
+            : Alert.alert('Select Your Category Please');
+        }}>
         <Text style={styles.continueButtonText}>Continue</Text>
       </TouchableOpacity>
     </View>

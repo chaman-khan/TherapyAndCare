@@ -13,12 +13,18 @@ import FeedBack from '../../screens/patient/Home/feedBack';
 import AccountDetails from '../../screens/patient/Home/accountDetails';
 import BookingDetails from '../../screens/patient/Home/bookingDetails';
 import Home from '../../screens/patient/Home/home';
+import BottomTab from '../tabs/bottomTab';
 
 function PatientStack() {
   const Stack = createNativeStackNavigator();
 
   return (
     <Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
+      <Stack.Screen
+        name="BottomTab"
+        component={BottomTab}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Home"
         component={Home}

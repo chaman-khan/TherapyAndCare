@@ -14,7 +14,7 @@ const {height} = Dimensions.get('screen');
 const CancelationFeePolicy = ({navigation, route}) => {
   const [isChecked, setIsChecked] = useState(false);
   const {message1} = route.params;
-  const [isShow, setIsShow] = useState(true);
+  const [isShow, setIsShow] = useState(false);
   const [fee, setFee] = useState('90');
   const [image, setImage] = useState(
     require('../../../Assets/Images/visa.png'),
@@ -78,6 +78,7 @@ const CancelationFeePolicy = ({navigation, route}) => {
             borderColor: 'grey',
             borderBottomWidth: 0.5,
             height: '50%',
+            alignItems: 'center', justifyContent: 'space-between'
           }}>
           <Image source={image} />
           <TextInput
@@ -109,7 +110,7 @@ const CancelationFeePolicy = ({navigation, route}) => {
             height: '50%',
             width: '90%',
             alignSelf: 'center',
-          }}>
+          }} onPress={() => setIsShow(true)}>
           <Text style={{color: '#1C76B3', fontSize: 14}}>More options</Text>
         </TouchableOpacity>
       </View>
@@ -130,7 +131,7 @@ const CancelationFeePolicy = ({navigation, route}) => {
         <Text style={{color: 'white'}}>Pay</Text>
       </TouchableOpacity>
       {isShow && (
-        <Modal onRequestClose={() => setIsShow(false)} transparent>
+        <Modal onRequestClose={() => setIsShow(false)} transparent style={{backgroundColor: 'rgba(250, 250, 250, 0.3)'}}>
           <View
             style={{
               width: '100%',
@@ -204,7 +205,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: theme.colors.primary,
     borderRadius: 10,
-    marginTop: 15,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -124,7 +124,7 @@ const SignIn = ({navigation}) => {
           justifyContent: 'center',
           alignSelf: 'center',
         }}
-        onPress={() => navigation.navigate('Options')}
+        onPress={() =>{ navigation.navigate('Options'); }}
         // onPress={handleLogin}
       >
         <Text style={{color: 'white'}}>Submit</Text>
