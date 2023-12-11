@@ -135,13 +135,13 @@ const FreeCanceltion = ({navigation}) => {
               Your appointment has been cancelled
             </Text>
             <TouchableOpacity
-        activeOpacity={1}
-        style={styles.Button_Box}
-        onPress={() => navigation.navigate('CancelationPolicy')}>
-        <View style={styles.Button} activeOpacity={0.7}>
-          <Text style={styles.Verify_Text}>Check out</Text>
-        </View>
-      </TouchableOpacity>
+              activeOpacity={1}
+              style={styles.Button_Box}
+              onPress={() => navigation.navigate('CancelationPolicy')}>
+              <View style={styles.Button} activeOpacity={0.7}>
+                <Text style={styles.Verify_Text}>Check out</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </Modal>
       )}

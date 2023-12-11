@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {
+  Dimensions,
   Image,
+  Modal,
   StyleSheet,
   Text,
   TextInput,
@@ -8,11 +10,15 @@ import {
   View,
 } from 'react-native';
 import {theme} from '../../../constants/theme';
-
+const {height} = Dimensions.get('screen');
 const CancelationFeePolicy = ({navigation, route}) => {
   const [isChecked, setIsChecked] = useState(false);
   const {message1} = route.params;
+  const [isShow, setIsShow] = useState(true);
   const [fee, setFee] = useState('90');
+  const [image, setImage] = useState(
+    require('../../../Assets/Images/visa.png'),
+  );
   console.log(message1);
   const [creditCardNumber, setCreditCardNumber] = useState('');
 
@@ -73,7 +79,7 @@ const CancelationFeePolicy = ({navigation, route}) => {
             borderBottomWidth: 0.5,
             height: '50%',
           }}>
-          <Image source={require('../../../Assets/Images/visa.png')} />
+          <Image source={image} />
           <TextInput
             style={styles.input}
             placeholder="XXXX XXXX XXXX XXXX"
@@ -83,39 +89,98 @@ const CancelationFeePolicy = ({navigation, route}) => {
             maxLength={19} // Adjust based on your needs
           />
           <TouchableOpacity onPress={() => setIsChecked(!isChecked)}>
-          <View style={[styles.checkbox]}>
-            <View
-              style={{
-                width: 10,
-                height: 10,
-                backgroundColor: isChecked
-                  ? theme.colors.primary
-                  : 'transparent',
-                borderRadius: 5,
-              }}></View>
-          </View>
+            <View style={[styles.checkbox]}>
+              <View
+                style={{
+                  width: 10,
+                  height: 10,
+                  backgroundColor: isChecked
+                    ? theme.colors.primary
+                    : 'transparent',
+                  borderRadius: 5,
+                }}></View>
+            </View>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={{alignItems: 'flex-end', justifyContent: 'flex-end', height: '50%', width: '90%', alignSelf: 'center'}}>
-            <Text style={{color: '#1C76B3', fontSize: 14,}}>More options</Text>
+        <TouchableOpacity
+          style={{
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
+            height: '50%',
+            width: '90%',
+            alignSelf: 'center',
+          }}>
+          <Text style={{color: '#1C76B3', fontSize: 14}}>More options</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity
+        style={{
+          height: 45,
+          width: '100%',
+          backgroundColor: theme.colors.primary,
+          marginTop: 50,
+          alignItems: 'center',
+          justifyContent: 'center',
+          alignSelf: 'center',
+          marginBottom: 100,
+        }}
+        onPress={() => {
+          navigation.navigate('BottomTab');
+        }}>
+        <Text style={{color: 'white'}}>Pay</Text>
+      </TouchableOpacity>
+      {isShow && (
+        <Modal onRequestClose={() => setIsShow(false)} transparent>
+          <View
             style={{
-              height: 45,
               width: '100%',
-              backgroundColor: theme.colors.primary,
-              marginTop: 50,
+              paddingVertical: 30,
+              marginTop: 200,
               alignItems: 'center',
               justifyContent: 'center',
-              alignSelf: 'center',
-              marginBottom: 100
-            }}
-            onPress={() => {
-              navigation.navigate('BottomTab');
+              backgroundColor: 'white',
+              gap: 20,
             }}>
-            <Text style={{color: 'white'}}>Pay</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setImage(require('../../../Assets/Images/MasterCard.png'));
+                setIsShow(false);
+              }}>
+              <Image
+                source={require('../../../Assets/Images/MasterCard.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+             onPress={() => {
+                setImage(require('../../../Assets/Images/Rupay.png'));
+                setIsShow(false);
+              }}>
+              <Image source={require('../../../Assets/Images/Rupay.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setImage(require('../../../Assets/Images/paypal.png'));
+                setIsShow(false);
+              }}>
+              <Image source={require('../../../Assets/Images/paypal.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setImage(require('../../../Assets/Images/paytm.png'));
+                setIsShow(false);
+              }}>
+              <Image source={require('../../../Assets/Images/paytm.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setImage(require('../../../Assets/Images/visa.png'));
+                setIsShow(false);
+              }}>
+              <Image source={require('../../../Assets/Images/visa.png')} />
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      )}
     </View>
   );
 };
