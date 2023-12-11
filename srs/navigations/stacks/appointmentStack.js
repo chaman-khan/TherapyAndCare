@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import FreeCanceltion from '../../screens/patient/Appointments/freeCancelation';
 import Appointments from '../../screens/patient/Appointments/appointments';
 import CancelationPolicy from '../../screens/patient/Appointments/cancelationPolicy';
+import CancelationFeePolicy from '../../screens/patient/Appointments/cancelationFeePolicy';
 
 const AppointmentStack = () => {
   const Stack = createNativeStackNavigator();
@@ -26,6 +27,11 @@ const AppointmentStack = () => {
       <Stack.Screen
         name="CancelationPolicy"
         component={CancelationPolicy}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="CancelationFeePolicy"
+        component={CancelationFeePolicy}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

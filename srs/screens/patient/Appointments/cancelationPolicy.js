@@ -14,7 +14,13 @@ const CancelationPolicy = ({navigation}) => {
     setIsChecked3(checkboxNumber === 3);
     setIsChecked4(checkboxNumber === 4);
     setIsChecked5(checkboxNumber === 5);
+    console.log('====================================');
+    console.log(checkboxNumber.value);
+    console.log('====================================');
+    setMessage(checkboxNumber.value);
+
   };
+  const [message, setMessage] = useState('');
   return (
     <View style={{width: '90%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
@@ -160,7 +166,7 @@ const CancelationPolicy = ({navigation}) => {
             justifyContent: 'center',
             alignSelf: 'center',
           }}
-          onPress={() => navigation.navigate('Options')}
+          onPress={() => navigation.navigate('CancelationFeePolicy', {})}
         >
           <Text style={{color: 'white'}}>Continue</Text>
         </TouchableOpacity>
