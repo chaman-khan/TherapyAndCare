@@ -86,7 +86,7 @@ const CheckBoxes = () => {
                 styles.checkbox}>
               <View
                 style={{
-                  width: 10,
+                  
                   height: 10,
                   backgroundColor: isChecked5
                     ? theme.colors.primary
