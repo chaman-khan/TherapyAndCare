@@ -40,7 +40,7 @@ const PhysioBottomtab = () => {
             iconName = require('../../Assets/Images/home.png');
           } else if (Screen_name === 'Locations') {
             iconName = require('../../Assets/Images/locations.png');
-          } else if (Screen_name === 'AppointmentStack') {
+          } else if (Screen_name === 'Appointment') {
             iconName = require('../../Assets/Images/Appointments.png');
           } else if (Screen_name === 'Profile') {
             iconName = require('../../Assets/Images/profile.png');

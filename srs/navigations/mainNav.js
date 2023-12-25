@@ -15,7 +15,7 @@ function MainNav() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="BottomTab"
+        initialRouteName="PhysioTherapyStack"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="SignIn" component={SignIn} />
