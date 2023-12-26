@@ -13,10 +13,10 @@ const Stack = createNativeStackNavigator();
 const PhysioBottomtab = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Locations"
       screenOptions={({route}) => ({
         tabBarActiveTintColor: '#20B7FE',
-        inactiveTintColor: 'gray', 
+        inactiveTintColor: 'gray',
         tabBarStyle: {
           backgroundColor: 'white',
           position: 'relative',
