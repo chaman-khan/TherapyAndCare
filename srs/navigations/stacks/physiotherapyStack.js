@@ -15,7 +15,7 @@ const PhysioTherapyStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="PhysioBottomtab"
+      initialRouteName="Registration"
       screenOptions={{headerShown: false}}>
       <Stack.Screen
         name="Registration"

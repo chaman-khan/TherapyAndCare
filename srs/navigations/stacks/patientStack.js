@@ -19,7 +19,7 @@ function PatientStack() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <Stack.Navigator initialRouteName='BottomTab' screenOptions={{headerShown: false}}>
+    <Stack.Navigator initialRouteName='Registration' screenOptions={{headerShown: false}}>
       <Stack.Screen
         name="BottomTab"
         component={BottomTab}

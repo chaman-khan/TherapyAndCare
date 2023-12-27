@@ -12,6 +12,7 @@ import {Country, State, City} from 'country-state-city';
 import {Dropdown} from 'react-native-element-dropdown';
 
 import {ScrollView} from 'react-native';
+import { responsiveScreenFontSize, responsiveScreenHeight } from 'react-native-responsive-dimensions';
 const AddDetails = ({navigation}) => {
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
@@ -254,14 +255,14 @@ const styles = StyleSheet.create({
     // borderRadius: 6,
     paddingHorizontal: 30,
   },
-  // DropDown_Item: {
-  //   height: responsiveScreenHeight(2),
-  //   width: '20%',
-  //   fontSize: responsiveScreenFontSize(1.6),
-  //   fontFamily: 'Poppins',
-  //   color: '#000000',
-  //   fontWeight: '400',
-  // },
+  DropDown_Item: {
+    height: responsiveScreenHeight(2),
+    width: '20%',
+    fontSize: responsiveScreenFontSize(1.6),
+    fontFamily: 'Poppins',
+    color: '#000000',
+    fontWeight: '400',
+  },
   placeholderStyle: {
     fontFamily: 'Inter',
     color: '#818181',

@@ -12,7 +12,7 @@ const AppointmentStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName="CancelationPolicy"
+      initialRouteName="Appointments"
       screenOptions={{headerShown: false}}>
       <Stack.Screen
         name="Appointments"

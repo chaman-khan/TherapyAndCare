@@ -12,6 +12,7 @@ import {Country, State, City} from 'country-state-city';
 import {Dropdown} from 'react-native-element-dropdown';
 
 import {ScrollView} from 'react-native';
+import { responsiveScreenFontSize, responsiveScreenHeight } from 'react-native-responsive-dimensions';
 
 const Registration = ({navigation}) => {
   const [isChecked1, setIsChecked1] = useState(false);
@@ -20,19 +21,30 @@ const Registration = ({navigation}) => {
   const [countryCode, setCountryCode] = useState('');
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
+  const [countryData, setCountryData] = useState([]);
+  // const [stateData, setStateData] = useState([]);
+  // const [cityData, setCityData] = useState([]);
   const [isFocus, setIsFocus] = useState(false);
+  const [countries, setCountries] = useState([]);
 
   const handleCheckboxToggle = checkboxNumber => {
     setIsChecked1(checkboxNumber === 1);
     setIsChecked2(checkboxNumber === 2);
   };
-  const countries = Country.getAllCountries();
+  const fetchCountryData = async () => {
+    const countries = Country.getAllCountries();
+    setCountries(countries)
+    const countryData = countries.map((country) => ({
+      label: country.flag,
+      value: country.name,
+      code: country.phonecode,
+    }));
+    setCountryData(countryData);
+  };
 
-  const countryData = countries.map(country => ({
-    label: country.flag,
-    value: country.name,
-    code: country.phonecode,
-  }));
+  useEffect(() => {
+    fetchCountryData();
+  }, []);
 
   useEffect(() => {
     // Find the country based on the entered country code
@@ -51,42 +63,48 @@ const Registration = ({navigation}) => {
     country => country.name === selectedCountry,
   );
   let stateData = [];
-  let cityData = [];
-  let states = [];
+let cityData = [];
+let states = [];
 
-  console.log('Selected Country:', selectedCountry);
+console.log('Selected Country:', selectedCountry);
 
-  if (selectedCountryData) {
-    // Remove the 'let' keyword here
-    states = State.getStatesOfCountry(selectedCountryData.isoCode);
-    console.log('States:', states);
+if (selectedCountryData) {
+  // Remove the 'let' keyword here
+  states = State.getStatesOfCountry(selectedCountryData.isoCode);
+  console.log('States:', states);
 
-    stateData = states.map(state => ({
-      label: state.name,
-      value: state.name,
-    }));
-  } else {
-    console.log('Selected country not found in data:', selectedCountry);
-  }
+  stateData = states.map(state => ({
+    label: state.name,
+    value: state.name,
+  }));
+} else {
+  console.log('Selected country not found in data:', selectedCountry);
+}
 
-  console.log('Selected State:', selectedState);
+console.log('Selected State:', selectedState);
 
+// Move this part inside the if block to avoid potential issues
+if (selectedCountryData) {
   const selectedStateData = states.find(state => state.name === selectedState);
 
   if (selectedStateData) {
     console.log('Selected state:', selectedState);
 
-    const cities = City.getCitiesOfState(selectedStateData.isoCode);
-    console.log('Cities:', cities);
+    cityData = City.getCitiesOfState(selectedStateData.isoCode);
+    console.log('Cities:', cityData);
 
-    cityData = cities.map(city => ({
-      label: city.name,
-      value: city.name,
+    cityData = cityData.map(city => ({
+      label: cityData.name,
+      value: cityData.name,
     }));
     console.log('City data:', cityData);
   } else {
     console.log('Selected state not found in data:', selectedState);
   }
+} else {
+  console.log('Cannot get cities without selected country data');
+}
+
   return (
     <ScrollView>
       <View>
@@ -97,7 +115,11 @@ const Registration = ({navigation}) => {
         <Text style={styles.headerText}>Register</Text>
         <View style={styles.input}>
           <Image source={require('../../Assets/Images/name.png')} />
-          <TextInput placeholder="Name" style={{fontSize: 16}} />
+          <TextInput
+            placeholder="Name"
+            placeholderTextColor={'grey'}
+            style={{fontSize: 16, color: 'black'}}
+          />
         </View>
         <View style={{width: '80%', alignSelf: 'center'}}>
           <View
@@ -157,7 +179,11 @@ const Registration = ({navigation}) => {
         </View>
         <View style={styles.input}>
           <Image source={require('../../Assets/Images/email.png')} />
-          <TextInput placeholder="Email Address" style={{fontSize: 16}} />
+          <TextInput
+            placeholder="Email Address"
+            placeholderTextColor={'grey'}
+            style={{fontSize: 16, color: 'black'}}
+          />
         </View>
 
         <View
@@ -175,7 +201,7 @@ const Registration = ({navigation}) => {
             maxHeight={300}
             labelField="label"
             valueField="value"
-            placeholder={!isFocus ? '...' : '...'}
+            placeholder={!isFocus ? 'Country' : '...'}
             value={selectedCountry}
             itemTextStyle={styles.DropDown_Item}
             onFocus={() => setIsFocus(true)}
@@ -188,17 +214,25 @@ const Registration = ({navigation}) => {
           />
           <View style={styles.input1}>
             <TextInput
-              style={{width: '25%', fontSize: 16}}
+              style={{width: '25%', fontSize: 16, color: 'black'}}
               value={`+${countryCode}`}
               onChangeText={txt => setCountryCode(txt.replace(/\D/g, ''))}
             />
-            <TextInput placeholder="Phone Number" style={{width: '70%'}} />
+            <TextInput
+              placeholder="Phone Number"
+              placeholderTextColor={'grey'}
+              style={{fontSize: 16, color: 'black'}}
+            />
           </View>
         </View>
 
         <View style={styles.input}>
           <Image source={require('../../Assets/Images/address.png')} />
-          <TextInput placeholder="address" style={{fontSize: 16}} />
+          <TextInput
+            placeholder="address"
+            placeholderTextColor={'grey'}
+            style={{fontSize: 16, color: 'black'}}
+          />
         </View>
         <View
           style={{
@@ -207,24 +241,7 @@ const Registration = ({navigation}) => {
             alignSelf: 'center',
             justifyContent: 'space-between',
           }}>
-          <Dropdown
-            style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
-            placeholderStyle={styles.placeholderStyle}
-            selectedTextStyle={styles.selectedTextStyle}
-            data={cityData}
-            maxHeight={300}
-            labelField="label"
-            valueField="value"
-            placeholder={!isFocus ? 'City' : 'City'}
-            value={selectedCity}
-            itemTextStyle={styles.DropDown_Item}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            onChange={item => {
-              setSelectedCity(item.value);
-              setIsFocus(false);
-            }}
-          />
+          
           <Dropdown
             style={styles.dropdown}
             placeholderStyle={styles.placeholderStyle}
@@ -243,16 +260,38 @@ const Registration = ({navigation}) => {
               setIsFocus(false);
             }}
           />
+          <Dropdown
+            style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            data={cityData}
+            maxHeight={300}
+            labelField="label"
+            valueField="value"
+            placeholder={!isFocus ? 'City' : 'City'}
+            value={selectedCity}
+            itemTextStyle={styles.DropDown_Item}
+            onFocus={() => setIsFocus(true)}
+            onBlur={() => setIsFocus(false)}
+            onChange={item => {
+              setSelectedCity(item.value);
+              setIsFocus(false);
+            }}
+          />
         </View>
         <View style={styles.input}>
           <Image source={require('../../Assets/Images/pinCode.png')} />
-          <TextInput placeholder="Pincode" style={{fontSize: 16}} />
+          <TextInput
+            placeholder="Pincode"
+            placeholderTextColor={'grey'}
+            style={{fontSize: 16, color: 'black'}}
+          />
         </View>
-        <TouchableOpacity activeOpacity={1} style={styles.Button_Box} onPress={() => navigation.replace('BottomTab')}>
-          <View
-            style={styles.Button}
-            activeOpacity={0.7}
-            >
+        <TouchableOpacity
+          activeOpacity={1}
+          style={styles.Button_Box}
+          onPress={() => navigation.replace('BottomTab')}>
+          <View style={styles.Button} activeOpacity={0.7}>
             <Text style={styles.Verify_Text}>Submit</Text>
           </View>
         </TouchableOpacity>
@@ -359,14 +398,14 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     paddingHorizontal: 30,
   },
-  // DropDown_Item: {
-  //   height: responsiveScreenHeight(2),
-  //   width: '20%',
-  //   fontSize: responsiveScreenFontSize(1.6),
-  //   fontFamily: 'Poppins',
-  //   color: '#000000',
-  //   fontWeight: '400',
-  // },
+  DropDown_Item: {
+    height: responsiveScreenHeight(2),
+    width: '20%',
+    fontSize: responsiveScreenFontSize(1.6),
+    fontFamily: 'Poppins',
+    color: '#000000',
+    fontWeight: '400',
+  },
   placeholderStyle: {
     fontFamily: 'Inter',
     color: '#818181',
