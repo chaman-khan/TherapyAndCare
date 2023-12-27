@@ -15,21 +15,21 @@ const PatientDetail = ({navigation, route}) => {
     <ScrollView>
       <View>
         <View style={{backgroundColor: 'white'}}>
-          <View style={styles.topBar}>
-            <Image source={require('../../../Assets/Images/backArrow.png')} />
-            <Text
-              style={{
-                color: theme.colors.primary,
-                fontSize: 24,
-                fontWeight: '400',
-              }}>
-              Patient Details
-            </Text>
-            <Image
-              source={require('../../../Assets/Images/backArrow.png')}
-              tintColor="transparent"
-            />
-          </View>
+            <View style={styles.topBar}>
+              <Image source={require('../../../Assets/Images/backArrow.png')} />
+              <Text
+                style={{
+                  color: theme.colors.primary,
+                  fontSize: 24,
+                  fontWeight: '400',
+                }}>
+                Patient Details
+              </Text>
+              <Image
+                source={require('../../../Assets/Images/backArrow.png')}
+                tintColor="transparent"
+              />
+            </View>
           <Image
             source={item.image}
             style={{
@@ -81,15 +81,15 @@ const PatientDetail = ({navigation, route}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  topBar: {
-    flexDirection: 'row',
-    width: '95%',
-    alignSelf: 'center',
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
+  const styles = StyleSheet.create({
+    topBar: {
+      flexDirection: 'row',
+      width: '95%',
+      alignSelf: 'center',
+      height: 60,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
   leftText: {
     fontSize: 16,
     fontFamily: 'Inter',
