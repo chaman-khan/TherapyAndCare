@@ -95,10 +95,10 @@ const AddDetails = ({navigation}) => {
           />
         </View>
         <View style={styles.input}>
-          <TextInput placeholder="Patient name" style={{fontSize: 16}} />
+          <TextInput placeholder="Patient name" placeholderTextColor={'grey'} style={{fontSize: 16, color: 'black'}} />
         </View>
         <View style={{...styles.input, justifyContent: 'space-between'}}>
-          <TextInput placeholder="Patient age" style={{fontSize: 16}} />
+          <TextInput placeholder="Patient age" placeholderTextColor={'grey'} style={{fontSize: 16, color: 'black'}} />
           <Image source={require('../../../Assets/Images/downArrow.png')} />
         </View>
 {/* 
@@ -112,16 +112,16 @@ const AddDetails = ({navigation}) => {
           
           <View style={styles.input}>
             <TextInput
-              style={{ fontSize: 16}}
+               placeholderTextColor={'grey'} style={{fontSize: 16, color: 'black'}}
               value={`+${countryCode}`}
               onChangeText={txt => setCountryCode(txt.replace(/\D/g, ''))}
             />
-            <TextInput placeholder="Phone Number"  />
+            <TextInput placeholder="Phone Number"  placeholderTextColor={'grey'} style={{fontSize: 16, color: 'black'}}  />
           </View>
         {/* </View> */}
 
         <View style={styles.input}>
-          <TextInput placeholder="Patient address" style={{fontSize: 16}} />
+          <TextInput placeholder="Patient address" placeholderTextColor={'grey'} style={{fontSize: 16, color: 'black'}} />
         </View>
         <View
           style={{
@@ -131,6 +131,24 @@ const AddDetails = ({navigation}) => {
             justifyContent: 'space-between',
             marginVertical: 10
           }}>
+            <Dropdown
+            style={styles.dropdown}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            data={stateData}
+            maxHeight={300}
+            labelField="label"
+            valueField="value"
+            placeholder={!isFocus ? 'State' : 'State'}
+            value={selectedState}
+            itemTextStyle={styles.DropDown_Item}
+            onFocus={() => setIsFocus(true)}
+            onBlur={() => setIsFocus(false)}
+            onChange={item => {
+              setSelectedState(item.value);
+              setIsFocus(false);
+            }}
+          />
           <Dropdown
             style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
             placeholderStyle={styles.placeholderStyle}
@@ -149,28 +167,11 @@ const AddDetails = ({navigation}) => {
               setIsFocus(false);
             }}
           />
-          <Dropdown
-            style={styles.dropdown}
-            placeholderStyle={styles.placeholderStyle}
-            selectedTextStyle={styles.selectedTextStyle}
-            data={stateData}
-            maxHeight={300}
-            labelField="label"
-            valueField="value"
-            placeholder={!isFocus ? 'State' : 'State'}
-            value={selectedState}
-            itemTextStyle={styles.DropDown_Item}
-            onFocus={() => setIsFocus(true)}
-            onBlur={() => setIsFocus(false)}
-            onChange={item => {
-              setSelectedState(item.value);
-              setIsFocus(false);
-            }}
-          />
+          
         </View>
         <View style={styles.input}>
           <Image source={require('../../../Assets/Images/pinCode.png')} />
-          <TextInput placeholder="Pincode" style={{fontSize: 16}} />
+          <TextInput placeholder="Pincode" placeholderTextColor={'grey'} style={{fontSize: 16, color: 'black'}} />
         </View>
         <TouchableOpacity
           activeOpacity={1}

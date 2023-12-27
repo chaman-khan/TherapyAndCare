@@ -6,6 +6,7 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {Text} from 'react-native-elements';
 import {theme} from '../../../constants/theme';
@@ -40,7 +41,8 @@ const AccountDetails = ({navigation}) => {
     setIsEnabled(previousState => !previousState);
   };
   return (
-    <View style={{width: '90%', alignSelf: 'center'}}>
+    <ScrollView>
+      <View style={{width: '90%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={require('../../../Assets/Images/backArrow.png')} />
@@ -79,14 +81,15 @@ const AccountDetails = ({navigation}) => {
         <Text>₹{fee}</Text>
       </View>
       <View>
-        <Text>Card number</Text>
+        <Text style={{color: 'black'}}>Card number</Text>
         <TextInput
           style={styles.input}
-          placeholder="XXXX XXXX XXXX XXXX"
+          placeholder="XXXX XXXX XXXX XXXX" placeholderTextColor={'grey'}
           keyboardType="numeric"
           value={creditCardNumber}
           onChangeText={text => formatCreditCardNumber(text)}
-          maxLength={19} // Adjust based on your needs
+          maxLength={19}
+          
         />
       </View>
       <View
@@ -98,10 +101,10 @@ const AccountDetails = ({navigation}) => {
           marginVertical: 20
         }}>
         <View style={{width: '45%'}}>
-          <Text>Expiration date</Text>
+          <Text style={{color: 'black'}}>Expiration date</Text>
           <TextInput
             style={{...styles.input}}
-            placeholder="MM / YY"
+            placeholder="MM / YY" placeholderTextColor={'grey'}
             keyboardType="numeric"
             value={expiryDate}
             onChangeText={text => formatExpiryDate(text)}
@@ -112,7 +115,7 @@ const AccountDetails = ({navigation}) => {
           <Text style={{color: '#1C76B3'}}>CVV</Text>
           <TextInput
             style={{...styles.input}}
-            placeholder=" . . ."
+            placeholder=" . . ." placeholderTextColor={'grey'}
             keyboardType="numeric"
             value={cvv}
             onChangeText={text => formatCVV(text)}
@@ -121,8 +124,8 @@ const AccountDetails = ({navigation}) => {
         </View>
       </View>
       <View style={{marginBottom: 35}}>
-        <Text>Card holder’s name</Text>
-        <TextInput style={styles.input} value={name} onChangeText={txt => setName(txt)} />
+        <Text style={{color: 'black'}}>Card holder’s name</Text>
+        <TextInput style={styles.input} placeholder='Card holder name' placeholderTextColor={'grey'} value={name} onChangeText={txt => setName(txt)} />
       </View>
       <TouchableOpacity
         activeOpacity={1}
@@ -143,6 +146,7 @@ const AccountDetails = ({navigation}) => {
         />
       </View>
     </View>
+    </ScrollView>
   );
 };
 
@@ -160,7 +164,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 0.3,
     borderRadius: 5,
-    padding: 10,
+    padding: 10, color: 'black'
   },
   Button_Box: {
     // borderWidth:2,

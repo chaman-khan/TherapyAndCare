@@ -146,7 +146,7 @@ const AppointmentDetails = ({navigation}) => {
                     style={{width: 12, height: 12, transform: [{scaleY: -1}]}}
                   />
                 </TouchableOpacity>
-                <Text>{`0${hours}`.slice(-2)} h</Text>
+                <Text style={styles.timeDigit}>{`0${hours}`.slice(-2)} h</Text>
                 <TouchableOpacity onPress={decrementHours}>
                   <Image
                     source={require('../../../Assets/Images/downArrow.png')}
@@ -283,6 +283,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter',
     fontWeight: '400',
     marginHorizontal: 10,
+    color: 'black'
   },
   button: {
     fontSize: 20,

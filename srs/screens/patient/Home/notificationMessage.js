@@ -37,7 +37,7 @@ const NotificationMessage = ({navigation}) => {
           fontSize: 16,
           fontFamily: 'Inter',
           textAlign: 'center',
-          marginVertical: 30,
+          marginVertical: 30, color: '#808080'
         }}>
         You can pay now
       </Text>

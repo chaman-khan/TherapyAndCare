@@ -80,17 +80,17 @@ const Scheduled = ({navigation, route}) => {
           width: '70%',
           alignSelf: 'center',
           fontSize: 16,
-          marginBottom: 40,
+          marginBottom: 40, color: '#808080'
         }}>
         Please hold on; your therapist will get back to you soon.
       </Text>
       <View
         style={{width: '100%', flexDirection: 'row', justifyContent: 'center'}}>
-        <Text>Time left : </Text>
+        <Text style={{color: '#1C76B3'}}>Time left : </Text>
         {timeDifference >= 0 ? (
-          <Text>{formatTimeLeft(timeLeft)}</Text>
+          <Text style={{color: 'black'}}>{formatTimeLeft(timeLeft)}</Text>
         ) : (
-          <Text>Time Over</Text>
+          <Text style={{color: 'black'}}>Time Over</Text>
         )}
       </View>
       <TouchableOpacity
