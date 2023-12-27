@@ -54,18 +54,29 @@ const CancelationFeePolicy = ({navigation, route}) => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text>{message1}</Text>
+        <Text style={{color: '#6C6C6C'}}>{message1}</Text>
       </View>
-      <Text
-        style={{
-          textAlign: 'center',
-          marginVertical: 30,
-          fontSize: 20,
-          color: 'balck',
-        }}>
-        Fees charges : ₹{fee}
-      </Text>
-      <Text style={{arginVertical: 20, fontSize: 20, color: 'balck'}}>
+      <View style={{flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center', gap: 10}}>
+        <Text
+          style={{
+            textAlign: 'center',
+            marginVertical: 30,
+            fontSize: 20,
+            color: 'black',
+          }}>
+          Fees charges :
+        </Text>
+        <Text
+          style={{
+            textAlign: 'center',
+            marginVertical: 30,
+            fontSize: 20,
+            color: '#696969',
+          }}>
+          ₹{fee}
+        </Text>
+      </View>
+      <Text style={{arginVertical: 20, fontSize: 20, color: '#1D1D1D', marginBottom: 8}}>
         Saved payment options
       </Text>
       <View
@@ -78,12 +89,13 @@ const CancelationFeePolicy = ({navigation, route}) => {
             borderColor: 'grey',
             borderBottomWidth: 0.5,
             height: '50%',
-            alignItems: 'center', justifyContent: 'space-between'
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}>
           <Image source={image} />
           <TextInput
             style={styles.input}
-            placeholder="XXXX XXXX XXXX XXXX"
+            placeholder="XXXX XXXX XXXX XXXX" placeholderTextColor={'grey'}
             keyboardType="numeric"
             value={creditCardNumber}
             onChangeText={text => formatCreditCardNumber(text)}
@@ -110,7 +122,8 @@ const CancelationFeePolicy = ({navigation, route}) => {
             height: '50%',
             width: '90%',
             alignSelf: 'center',
-          }} onPress={() => setIsShow(true)}>
+          }}
+          onPress={() => setIsShow(true)}>
           <Text style={{color: '#1C76B3', fontSize: 14}}>More options</Text>
         </TouchableOpacity>
       </View>
@@ -126,12 +139,15 @@ const CancelationFeePolicy = ({navigation, route}) => {
           marginBottom: 100,
         }}
         onPress={() => {
-          navigation.navigate('BottomTab');
+          navigation.replace('PatientStack');
         }}>
         <Text style={{color: 'white'}}>Pay</Text>
       </TouchableOpacity>
       {isShow && (
-        <Modal onRequestClose={() => setIsShow(false)} transparent style={{backgroundColor: 'rgba(250, 250, 250, 0.3)'}}>
+        <Modal
+          onRequestClose={() => setIsShow(false)}
+          transparent
+          style={{backgroundColor: 'rgba(250, 250, 250, 0.3)'}}>
           <View
             style={{
               width: '100%',
@@ -152,7 +168,7 @@ const CancelationFeePolicy = ({navigation, route}) => {
               />
             </TouchableOpacity>
             <TouchableOpacity
-             onPress={() => {
+              onPress={() => {
                 setImage(require('../../../Assets/Images/Rupay.png'));
                 setIsShow(false);
               }}>
@@ -198,6 +214,7 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     padding: 10,
+    color: 'black'
   },
   checkbox: {
     width: 20,

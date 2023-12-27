@@ -148,7 +148,7 @@ const FeedBack = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <TextInput
-          placeholder="Add your message"
+          placeholder="Add your message" placeholderTextColor={'grey'}
           style={{
             width: '90%',
             alignSelf: 'center',
@@ -159,6 +159,7 @@ const FeedBack = ({navigation}) => {
             borderWidth: 1,
             borderRadius: 6,
             marginTop: 20,
+            color: 'black'
           }}
         />
         <TouchableOpacity

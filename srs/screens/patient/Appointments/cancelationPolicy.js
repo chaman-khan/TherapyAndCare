@@ -92,7 +92,7 @@ const CancelationPolicy = ({navigation}) => {
             ))}
           </View>
           <TextInput
-            placeholder="Add your message"
+            placeholder="Add your message" placeholderTextColor={'grey'}
             style={{
               width: '100%',
               alignSelf: 'center',
@@ -103,6 +103,7 @@ const CancelationPolicy = ({navigation}) => {
               borderWidth: 1,
               borderRadius: 6,
               marginTop: 20,
+              color: 'black'
             }}
             value={generateMessage()}
           />

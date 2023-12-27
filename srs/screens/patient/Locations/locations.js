@@ -18,7 +18,6 @@ const {width, height} = Dimensions.get('screen');
 const Locations = ({navigation, route}) => {
   const {item} = route?.params ?? {};
 
-
   const [currentLocation, setCurrentLocation] = useState('Select Location');
   const [latitude, setLatitude] = useState('');
   const [longitude, setlongitude] = useState('');
@@ -153,14 +152,17 @@ const Locations = ({navigation, route}) => {
                 />
               )}
             </MapView>
-            <TouchableOpacity style={{...styles.info,  marginTop: item ? height - height / 2 : height - height / 2.2,}} activeOpacity={1} onPress={() => item ? navigation.navigate('TimeOUt') : null}>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate(item ? 'PatientDetail' : 'Profile', {
-                    item,
-                  })
-                }>
-                <Text style={{color: 'blue', textAlign: 'right'}}>Details</Text>
+            <TouchableOpacity
+              style={{
+                ...styles.info,
+                marginTop: item ? height - height / 2 : height - height / 2.2,
+              }}
+              activeOpacity={1}
+              onPress={() => (item ? navigation.navigate('TimeOUt') : null)}>
+              <TouchableOpacity activeOpacity={1}>
+                <Text style={{color: '#008000', textAlign: 'right'}}>
+                  Available
+                </Text>
               </TouchableOpacity>
               <View
                 style={{
@@ -170,16 +172,17 @@ const Locations = ({navigation, route}) => {
                   justifyContent: 'space-between',
                 }}>
                 <Image source={item ? item.image : img} />
-                <View style={{width: '70%', gap: 10}}>
+                <View style={{width: '70%', gap: 5}}>
                   <Text style={{color: 'black', fontSize: 20}}>
-                    {item ? item.name : name}
+                    {item ? item.doctorName : name}
                   </Text>
                   <Text style={{color: '#616161'}}>
-                    {item ? item.concern : specialist}
+                    {item ? item.specialist : specialist}
                   </Text>
                   <Text style={{color: '#616161'}}>
                     {item ? item.address : address}
                   </Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                   <View style={{flexDirection: 'row', gap: 7}}>
                     <Image
                       source={require('../../../Assets/Images/location.png')}
@@ -187,6 +190,8 @@ const Locations = ({navigation, route}) => {
                       style={{width: 20, height: 20}}
                     />
                     <Text style={{color: '#616161'}}>{distance} KM</Text>
+                  </View>
+                  <Text style={{color: '#1C76B3'}}>(10 Am - 2 Pm)</Text>
                   </View>
                 </View>
               </View>
@@ -207,7 +212,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     backgroundColor: '#F6F6F6',
     borderRadius: 10,
-   
   },
   input: {
     width: '90%',

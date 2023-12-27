@@ -87,7 +87,7 @@ const FreeCanceltion = ({navigation}) => {
                 fontSize: 16,
                 width: '90%',
                 textAlign: 'center',
-                alignSelf: 'center',
+                alignSelf: 'center', color: '#808080'
               }}>
               Lorem Ipsum is simply dummy of the printing and typesetting
               industry

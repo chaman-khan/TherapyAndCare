@@ -42,7 +42,7 @@ const BottomTab = () => {
             iconName = require('../../Assets/Images/home.png');
           } else if (Screen_name === 'Locations') {
             iconName = require('../../Assets/Images/locations.png');
-          } else if (Screen_name === 'AppointmentStack') {
+          } else if (Screen_name === 'Appointments') {
             iconName = require('../../Assets/Images/Appointments.png');
           } else if (Screen_name === 'Profile') {
             iconName = require('../../Assets/Images/profile.png');
@@ -73,8 +73,8 @@ const BottomTab = () => {
         }}
       />
       <Tab.Screen
-        name="AppointmentStack"
-        component={AppointmentStack}
+        name="Appointments"
+        component={Appointments}
         options={{
           headerShown: false,
           title: 'Appointment',
