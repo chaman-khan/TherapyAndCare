@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Registration from '../../screens/physiotherapy/registration';
 import PhysioBottomtab from '../tabs/physioBottomTab';
 import PatientDetail from '../../screens/physiotherapy/Home/patientDetail';
+import Availability from '../../screens/physiotherapy/Home/availability';
 
 const PhysioTherapyStack = () => {
   const Stack = createNativeStackNavigator();
@@ -26,6 +27,11 @@ const PhysioTherapyStack = () => {
       <Stack.Screen
         name="PatientDetail"
         component={PatientDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Availability"
+        component={Availability}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

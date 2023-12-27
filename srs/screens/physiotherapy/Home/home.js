@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import {theme} from '../../../constants/theme';
+import {cancelButtonStyles} from 'react-native-modal-datetime-picker';
 
 const {height} = Dimensions.get('screen');
 
@@ -72,61 +73,57 @@ const Home = ({navigation}) => {
       date: '15 Nov 2023',
       timeLeft: 2,
     },
+    {
+      id: 6,
+      image: require('../../../Assets/Images/p1.png'),
+      name: 'Mohit Kumar',
+      Age: 40,
+      concern: 'Geriatric',
+      contact: '887756XXX7',
+      time: '10:00 AM',
+      date: '15 Nov 2023',
+      timeLeft: 2,
+    },
+    {
+      id: 7,
+      image: require('../../../Assets/Images/p1.png'),
+      name: 'Mohit Kumar',
+      Age: 40,
+      concern: 'Geriatric',
+      contact: '887756XXX7',
+      time: '10:00 AM',
+      date: '15 Nov 2023',
+      timeLeft: 2,
+    },
+    {
+      id: 8,
+      image: require('../../../Assets/Images/p1.png'),
+      name: 'Mohit Kumar',
+      Age: 40,
+      concern: 'Geriatric',
+      contact: '887756XXX7',
+      time: '10:00 AM',
+      date: '15 Nov 2023',
+      timeLeft: 2,
+    },
   ];
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity activeOpacity={1}
-        style={{
-          width: '90%',
-          alignSelf: 'center',
-          flexDirection: 'row',
-          padding: 5,
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginVertical: 10,
-          backgroundColor: '#FAFAFA',
-          borderRadius: 10,
-        }} onPress={() => navigation.navigate('PatientDetail', {item})}>
+      <TouchableOpacity
+        activeOpacity={1}
+        style={styles.renderContainer}
+        onPress={() => navigation.navigate('PatientDetail', {item})}>
         <Image source={item.image} />
         <View style={{width: '70%', gap: 10}}>
-          <Text
-            style={{
-              color: 'black',
-              fontSize: 20,
-              fontWeight: '500',
-              fontFamily: 'Inter',
-            }}>
-            {item.name}
-          </Text>
+          <Text style={styles.nameStayle}>{item.name}</Text>
           <Text style={{color: '#1C76B3'}}>
             Time left : {item.timeLeft} Hours
           </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-            <TouchableOpacity
-              activeOpacity={1}
-              style={{
-                width: '45%',
-                height: 25,
-                backgroundColor: '#1C76B3',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
+          <View style={styles.btnView}>
+            <TouchableOpacity activeOpacity={1} style={styles.confirm}>
               <Text style={{color: 'white'}}>Confirm</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={1}
-              style={{
-                width: '40%',
-                height: 25,
-                backgroundColor: 'white',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
+            <TouchableOpacity activeOpacity={1} style={styles.location}>
               <Text style={{color: '#1C76B3'}}>See Location</Text>
             </TouchableOpacity>
           </View>
@@ -140,8 +137,8 @@ const Home = ({navigation}) => {
         <View style={{flexDirection: 'row', gap: 10}}>
           <Image source={require('../../../Assets/Images/location.png')} />
           <View>
-            <Text style={{fontSize: 14, fontWeight: '500'}}>{location}</Text>
-            <Text style={{fontSize: 12, fontWeight: '400'}}>{locationDes}</Text>
+            <Text style={{fontSize: 14, fontWeight: '500', color: 'black'}}>{location}</Text>
+            <Text style={{fontSize: 12, fontWeight: '400', color: 'grey'}}>{locationDes}</Text>
           </View>
         </View>
         <Image
@@ -149,17 +146,8 @@ const Home = ({navigation}) => {
           tintColor="transparent"
         />
       </View>
-      <Text
-        style={{
-          fontFamily: 'Inter',
-          fontSize: 24,
-          color: theme.colors.primary,
-          textAlign: 'center',
-          marginVertical: 20,
-        }}>
-        Patient Appointments
-      </Text>
-      <View style={{height: height - height/3}}>
+      <Text style={styles.header}>Patient Appointments</Text>
+      <View style={{height: height - height / 3, marginBottom: 100}}>
         <FlatList
           data={DATA}
           renderItem={renderItem}
@@ -178,6 +166,49 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  renderContainer: {
+    width: '90%',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 10,
+    backgroundColor: '#FAFAFA',
+    borderRadius: 10,
+  },
+  nameStayle: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: '500',
+    fontFamily: 'Inter',
+  },
+  confirm: {
+    width: '45%',
+    height: 25,
+    backgroundColor: '#1C76B3',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  location: {
+    width: '40%',
+    height: 25,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btnView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  header: {
+    fontFamily: 'Inter',
+    fontSize: 24,
+    color: theme.colors.primary,
+    textAlign: 'center',
+    marginVertical: 20,
   },
 });
 

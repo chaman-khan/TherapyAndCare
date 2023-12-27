@@ -64,7 +64,7 @@ const PatientDetail = ({navigation, route}) => {
             <Text style={styles.rightText}>{item.date}</Text>
           </View>
         </View>
-        <TouchableOpacity
+        <TouchableOpacity onPress={() =>navigation.navigate('Availability')}
           style={{
             width: '90%',
             height: 45,
