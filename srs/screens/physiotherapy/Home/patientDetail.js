@@ -15,21 +15,23 @@ const PatientDetail = ({navigation, route}) => {
     <ScrollView>
       <View>
         <View style={{backgroundColor: 'white'}}>
-            <View style={styles.topBar}>
+          <View style={styles.topBar}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image source={require('../../../Assets/Images/backArrow.png')} />
-              <Text
-                style={{
-                  color: theme.colors.primary,
-                  fontSize: 24,
-                  fontWeight: '400',
-                }}>
-                Patient Details
-              </Text>
-              <Image
-                source={require('../../../Assets/Images/backArrow.png')}
-                tintColor="transparent"
-              />
-            </View>
+            </TouchableOpacity>
+            <Text
+              style={{
+                color: theme.colors.primary,
+                fontSize: 24,
+                fontWeight: '400',
+              }}>
+              Patient Details
+            </Text>
+            <Image
+              source={require('../../../Assets/Images/backArrow.png')}
+              tintColor="transparent"
+            />
+          </View>
           <Image
             source={item.image}
             style={{
@@ -57,14 +59,15 @@ const PatientDetail = ({navigation, route}) => {
           </View>
           <View style={{width: '50%', gap: 15}}>
             <Text style={styles.rightText}>{item.name}</Text>
-            <Text style={styles.rightText}>{item.Age}</Text>
+            <Text style={styles.rightText}>{item.age}</Text>
             <Text style={styles.rightText}>{item.concern}</Text>
             <Text style={styles.rightText}>{item.contact}</Text>
             <Text style={styles.rightText}>{item.time}</Text>
             <Text style={styles.rightText}>{item.date}</Text>
           </View>
         </View>
-        <TouchableOpacity onPress={() =>navigation.navigate('Availability')}
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Availability', {item})}
           style={{
             width: '90%',
             height: 45,
@@ -81,15 +84,15 @@ const PatientDetail = ({navigation, route}) => {
   );
 };
 
-  const styles = StyleSheet.create({
-    topBar: {
-      flexDirection: 'row',
-      width: '95%',
-      alignSelf: 'center',
-      height: 60,
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    },
+const styles = StyleSheet.create({
+  topBar: {
+    flexDirection: 'row',
+    width: '95%',
+    alignSelf: 'center',
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   leftText: {
     fontSize: 16,
     fontFamily: 'Inter',

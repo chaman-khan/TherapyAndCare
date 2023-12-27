@@ -129,7 +129,7 @@ const Appointments = () => {
     <View>
       <View style={styles.topBar}>
           <Image source={require('../../../Assets/Images/backArrow.png')} />
-          <Text style={styles.header}>Patient Appointments</Text>
+          <Text style={styles.header}>Scheduled Appointments</Text>
           <Image source={require('../../../Assets/Images/backArrow.png')} tintColor={'transparent'} />
        
       </View>

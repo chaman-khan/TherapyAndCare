@@ -58,16 +58,16 @@ const Home = ({navigation}) => {
         <View style={{flexDirection: 'row', gap: 10}}>
           <Image source={require('../../../Assets/Images/location.png')} />
           <View>
-            <Text style={{fontSize: 14, fontWeight: '500'}}>{location}</Text>
-            <Text style={{fontSize: 12, fontWeight: '400'}}>{locationDes}</Text>
+            <Text style={{fontSize: 14, fontWeight: '500', color:'black'}}>{location}</Text>
+            <Text style={{fontSize: 12, fontWeight: '400', color: '#727272'}}>{locationDes}</Text>
           </View>
         </View>
         <Image source={require('../../../Assets/Images/notifi.png')} />
       </View>
       <View style={styles.searchBox}>
         <TextInput
-          placeholder="Search Here"
-          style={{width: '80%', fontSize: 14, textAlign: 'center'}}
+          placeholder="Search Here" placeholderTextColor={'black'}
+          style={{width: '80%', fontSize: 14, textAlign: 'center', color: 'black'}}
         />
         <View style={{width: '10%'}}>
         <Image

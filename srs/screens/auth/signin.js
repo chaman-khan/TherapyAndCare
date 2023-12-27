@@ -102,14 +102,14 @@ const SignIn = ({navigation}) => {
       </Text>
       <View style={styles.input}>
         <Image source={require('../../Assets/Images/email.png')} />
-        <TextInput placeholder="Email" style={{fontSize: 16}} />
+        <TextInput placeholder="Email" placeholderTextColor={'grey'} style={{fontSize: 16, color: 'black'}} />
       </View>
       {emailError ? (
         <Text style={styles.Error_Text}>* Enter Valid Email</Text>
       ) : null}
       <View style={styles.input}>
         <Image source={require('../../Assets/Images/contact.png')} />
-        <TextInput placeholder="Contact Number" style={{fontSize: 16}} />
+        <TextInput placeholder="Contact Number" placeholderTextColor={'grey'} style={{fontSize: 16, color: 'black'}}/>
       </View>
       {passwordError ? (
         <Text style={styles.Error_Text}>* Enter Valid password</Text>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -44,7 +45,12 @@ const FeedBack = ({navigation}) => {
         </View>
         <View style={{width: '90%', alignSelf: 'center'}}>
           <Text
-            style={{fontSize: 20, fontFamily: 'Inter', textAlign: 'center'}}>
+            style={{
+              fontSize: 20,
+              fontFamily: 'Inter',
+              textAlign: 'center',
+              color: '#616161',
+            }}>
             Tell us what went wrong...!
           </Text>
           <View style={{width: '60%', height: 50, alignSelf: 'center'}}>
@@ -52,7 +58,7 @@ const FeedBack = ({navigation}) => {
           </View>
         </View>
         <View style={{flexDirection: 'row', alignSelf: 'center'}}>
-          <Text>Choose my answer </Text>
+          <Text style={{color: 'black'}}>Choose my answer </Text>
           <Image source={require('../../../Assets/Images/smile.png')} />
         </View>
         <View
@@ -165,9 +171,10 @@ const FeedBack = ({navigation}) => {
             justifyContent: 'center',
             alignSelf: 'center',
           }}
-          onPress={() => navigation.navigate('Options')}
-          // onPress={handleLogin}
-        >
+          onPress={() => {
+            Alert.alert('Alert', 'FeedbAck submitted, thanks..!');
+            navigation.navigate('BottomTab');
+          }}>
           <Text style={{color: 'white'}}>Continue</Text>
         </TouchableOpacity>
       </View>

@@ -52,7 +52,7 @@ const Options = ({navigation}) => {
                 borderRadius: 5,
               }}></View>
           </View>
-          <Text style={styles.checkboxText}>Physiotherapy</Text>
+          <Text style={styles.checkboxText}>Physiotherapist</Text>
         </View>
       </TouchableOpacity>
 
@@ -93,7 +93,7 @@ const Options = ({navigation}) => {
             ? navigation.navigate('PhysioTherapyStack')
             : isChecked2
             ? navigation.navigate('PatientStack')
-            : Alert.alert('Select Your Category Please');
+            : Alert.alert('Alert', 'Select Your Category Please');
         }}>
         <Text style={styles.continueButtonText}>Continue</Text>
       </TouchableOpacity>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {theme} from '../../../constants/theme';
 
 const ConfirmInfo = ({navigation}) => {
@@ -41,6 +41,7 @@ const ConfirmInfo = ({navigation}) => {
           fontFamily: 'Inter',
           textAlign: 'center',
           marginBottom: 30,
+          color: '#656565',
         }}>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry.
@@ -114,8 +115,13 @@ const ConfirmInfo = ({navigation}) => {
           alignItems: 'center',
           justifyContent: 'center',
           alignSelf: 'center',
-        }} activeOpacity={1}
-        onPress={() => navigation.navigate('PatientStack',{screen: 'AddDetails'} )}
+        }}
+        activeOpacity={1}
+        onPress={() => {
+          isChecked1 || isChecked2
+            ? navigation.navigate('PatientStack',{screen: 'AddDetails'} )
+            : Alert.alert('Alert', 'Select One of them Please');
+        }}
         // onPress={handleLogin}
       >
         <Text style={{color: 'white'}}>Continue</Text>
