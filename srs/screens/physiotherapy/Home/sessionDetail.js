@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -42,7 +43,8 @@ const SessionDetail = ({navigation}) => {
   };
 
   return (
-    <View>
+    <ScrollView>
+      <View>
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image source={require('../../../Assets/Images/backArrow.png')} />
@@ -100,7 +102,7 @@ const SessionDetail = ({navigation}) => {
             setIsFocus(false);
           }}
         />
-        <View style={{backgroundColor: '#F4F4F4'}}>
+        <View style={{backgroundColor: '#F4F4F4', height: 500}}>
           <View
             style={{
               width: '85%',
@@ -108,9 +110,12 @@ const SessionDetail = ({navigation}) => {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
+              marginVertical: 10
             }}>
             <Text style={{color: 'black', fontSize: 18}}>Signature</Text>
-            <Text style={{color: '#1C76B3', fontSize: 18}}>Clear</Text>
+            <TouchableOpacity activeOpacity={1} onPress={() => setSource(null)}>
+              <Text style={{color: '#1C76B3', fontSize: 18}}>Clear</Text>
+            </TouchableOpacity>
           </View>
           <TouchableOpacity
             activeOpacity={1}
@@ -126,12 +131,13 @@ const SessionDetail = ({navigation}) => {
           <TouchableOpacity
             activeOpacity={1}
             style={styles.btn}
-            onPress={() => navigation.replace('PhysioTherapyStack')}>
+            onPress={() => navigation.replace('PhysioTherapyStack', {screen: 'PhysioBottomtab'})}>
             <Text style={{color: 'white', fontSize: 16}}>Submit</Text>
           </TouchableOpacity>
         </View>
       </View>
     </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({

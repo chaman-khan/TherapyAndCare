@@ -221,7 +221,7 @@ if (selectedCountryData) {
             <TextInput
               placeholder="Phone Number"
               placeholderTextColor={'grey'}
-              style={{fontSize: 16, color: 'black'}}
+              style={{fontSize: 16, color: 'black'}} keyboardType='numeric'
             />
           </View>
         </View>

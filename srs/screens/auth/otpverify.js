@@ -6,10 +6,11 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {theme} from '../../constants/theme';
 
-const OTPVerification = () => {
+const OTPVerification = ({navigation}) => {
   const [verificationCode, setVerificationCode] = useState(['', '', '', '']);
   const inputRefs = useRef([]);
   const handleVerificationCodeChange = (text, index) => {
@@ -31,7 +32,7 @@ const OTPVerification = () => {
     if (code.length === 4) {
       // Code verification logic here
       Alert.alert('Success', 'Verification code is correct!');
-      navigation.navigate('Reset Password Screen');
+      navigation.navigate('Options');
     } else {
       Alert.alert('Incorrect', 'Please enter a 6-digit verification code.');
     }
@@ -55,7 +56,13 @@ const OTPVerification = () => {
         }}>
         OTP Verification
       </Text>
-      <Text style={{textAlign: 'center', fontFamily: 'Inter', fontSize: 18}}>
+      <Text
+        style={{
+          textAlign: 'center',
+          fontFamily: 'Inter',
+          fontSize: 18,
+          color: '#7B7B7B',
+        }}>
         We have send the OTP on
         <Text style={{color: 'black'}}> 99XXXXX778 </Text>
         will apply auto to the fields
@@ -87,6 +94,7 @@ const OTPVerification = () => {
           style={{
             fontFamily: 'Inter',
             fontSize: 18,
+            color: '#1D1D1D',
           }}>
           If you don't receive code
         </Text>
