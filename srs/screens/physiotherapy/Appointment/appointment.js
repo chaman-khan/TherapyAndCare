@@ -13,95 +13,103 @@ import {cancelButtonStyles} from 'react-native-modal-datetime-picker';
 
 const {height} = Dimensions.get('screen');
 
-const Appointments = () => {
+const Appointments = ({navigation}) => {
   const DATA = [
     {
       id: 1,
       image: require('../../../Assets/Images/p1.png'),
       name: 'Mohit Kumar',
-      Age: 40,
+      age: 40,
       concern: 'Kinesiology Taping',
       contact: '887756XXX7',
       time: '70:00 AM',
       date: '15 Nov 2023',
       timeLeft: 2,
+      address: '123 Main Street, City1',
     },
     {
       id: 2,
       image: require('../../../Assets/Images/p2.png'),
-      name: 'Sanjna singh',
-      Age: 40,
+      name: 'Sanjna Singh',
+      age: 40,
       concern: 'Neurological physical',
       contact: '887756XXX7',
       time: '10:00 AM',
       date: '15 Nov 2023',
       timeLeft: 2,
+      address: '456 Oak Avenue, City2',
     },
     {
       id: 3,
       image: require('../../../Assets/Images/p3.png'),
-      name: 'Manan singh',
-      Age: 40,
+      name: 'Manan Singh',
+      age: 40,
       concern: 'Neurological',
       contact: '887756XXX7',
       time: '10:00 AM',
       date: '15 Nov 2023',
       timeLeft: 2,
+      address: '789 Pine Road, City3',
     },
     {
       id: 4,
       image: require('../../../Assets/Images/p4.png'),
-      name: 'Anish dutt',
-      Age: 40,
+      name: 'Anish Dutt',
+      age: 40,
       concern: 'Cardiovascular',
       contact: '785675768',
       time: '10:00 AM',
       date: '15 Nov 2023',
       timeLeft: 2,
+      address: '101 Maple Lane, City4',
     },
     {
       id: 5,
       image: require('../../../Assets/Images/p1.png'),
       name: 'Mohit Kumar',
-      Age: 40,
+      age: 40,
       concern: 'Geriatric',
       contact: '887756XXX7',
       time: '10:00 AM',
       date: '15 Nov 2023',
       timeLeft: 2,
+      address: '202 Elm Street, City5',
     },
     {
       id: 6,
       image: require('../../../Assets/Images/p1.png'),
       name: 'Mohit Kumar',
-      Age: 40,
+      age: 40,
       concern: 'Geriatric',
       contact: '887756XXX7',
       time: '10:00 AM',
       date: '15 Nov 2023',
       timeLeft: 2,
+      address: '303 Birch Avenue, City6',
     },
     {
       id: 7,
       image: require('../../../Assets/Images/p1.png'),
       name: 'Mohit Kumar',
-      Age: 40,
+      age: 40,
       concern: 'Geriatric',
       contact: '887756XXX7',
       time: '10:00 AM',
       date: '15 Nov 2023',
       timeLeft: 2,
+      address: '404 Oak Street, City7',
     },
     {
       id: 8,
       image: require('../../../Assets/Images/p1.png'),
       name: 'Mohit Kumar',
-      Age: 40,
+      age: 40,
       concern: 'Geriatric',
       contact: '887756XXX7',
       time: '10:00 AM',
       date: '15 Nov 2023',
       timeLeft: 2,
+      address: '505 Cedar Road, City8',
     },
   ];
   const renderItem = ({item}) => {
@@ -117,7 +125,15 @@ const Appointments = () => {
             Time left : {item.timeLeft} Hours
           </Text>
           <View style={styles.btnView}>
-            <TouchableOpacity activeOpacity={1} style={styles.confirm}>
+            <TouchableOpacity
+              activeOpacity={1}
+              style={styles.confirm}
+              onPress={() =>
+                navigation.navigate('PhysioBottomtab', {
+                  screen: 'Locations',
+                  params: {item},
+                })
+              }>
               <Text style={{color: 'white'}}>See loation</Text>
             </TouchableOpacity>
           </View>
@@ -128,10 +144,12 @@ const Appointments = () => {
   return (
     <View>
       <View style={styles.topBar}>
-          <Image source={require('../../../Assets/Images/backArrow.png')} />
-          <Text style={styles.header}>Scheduled Appointments</Text>
-          <Image source={require('../../../Assets/Images/backArrow.png')} tintColor={'transparent'} />
-       
+        <Image source={require('../../../Assets/Images/backArrow.png')} />
+        <Text style={styles.header}>Scheduled Appointments</Text>
+        <Image
+          source={require('../../../Assets/Images/backArrow.png')}
+          tintColor={'transparent'}
+        />
       </View>
       <View style={{height: height - height / 4, marginBottom: 100}}>
         <FlatList
